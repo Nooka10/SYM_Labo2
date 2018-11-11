@@ -1,0 +1,30 @@
+<resources>
+	<string name="app_name">SYM Labo 2</string>
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+	<string name="nav_header_title">Created by</string>
+	<string name="nav_header_subtitle">Antoine Rochat, Benoît Schopfer et Jérémie Châtillon</string>
+	<string name="nav_header_desc">Navigation header</string>
+	<string name="action_settings">Settings</string>
+	<string name="compressedSend">Compressed transmission</string>
+	<string name="objectSend">Object transmission</string>
+	<string name="delayedSend">Delayed transmission</string>
+	<string name="asynchronousSend">Asynchronous transmission</string>
+	<string name="main">Home</string>
+
+	<string name="mainFragmentText">Sélectionnez un nouvel onglet</string>
+	<string name="asyncSendFragment">asyncSendFragment</string>
+	<string name="asyncFragment_InputTextView">Input to server</string>
+	<string name="asyncFragment_editText">Hello World !</string>
+	<string name="asyncFragment_textButton">Send async request</string>
+	<string name="asyncFragment_ResponseTitleTextView">Response from server</string>
+	<string name="asyncFragment_ResponseContentTextView">No response yet.</string>
+
+	<string name="delayedSendFragment">delayedSendFragment</string>
+	<string name="delayedFragment_InputTextView">Input to server</string>
+	<string name="delayedFragment_editText">Hello World !</string>
+	<string name="delayedFragment_textButton">Send delayed request</string>
+	<string name="delayedFragment_ResponseTitleTextView">Response from server</string>
+	<string name="delayedFragment_ResponseContentTextView">No response yet.</string>
+
+</resources>
