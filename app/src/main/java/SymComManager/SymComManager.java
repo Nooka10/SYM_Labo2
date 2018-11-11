@@ -34,6 +34,9 @@ class SymComManager {
 				.url(url)
 				.post(requestBody)
 				.addHeader("content-type", "plain/text")
+				// FIXME: j'arrive pas à configurer ces entêtes....?!
+				// .addHeader("X-Network", "[CSD, GPRS, EDGE, UMTS, HSPA, LTE]")
+				// .addHeader("X-Content-Encoding", "deflate")
 				.build();
 	}
 	

@@ -27,4 +27,13 @@
 	<string name="delayedFragment_ResponseTitleTextView">Response from server</string>
 	<string name="delayedFragment_ResponseContentTextView">No response yet.</string>
 
+	<string name="objectFragment_objectContentTextView">Object Content</string>
+	<string name="objectFragment_computerNameEditText">Computer name</string>
+	<string name="objectFragment_computerManufacturerEditText">Computer manufacturer</string>
+	<string name="objectFragment_sendJsonObjectButton">Send Computer as JSON object</string>
+	<string name="objectFragment_sendXmlObjectButton">Send computer as XML object</string>
+	<string name="objectFragment_sendBigJsonObjectButton">Send big JSON object</string>
+	<string name="objectFragment_responseTitleTextView">Response from server</string>
+	<string name="objectFragment_ResponseContentTextView">No response yet.</string>
+
 </resources>
