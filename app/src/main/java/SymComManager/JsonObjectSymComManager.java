@@ -1,16 +1,23 @@
 package SymComManager;
 
+import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
 
-public class AsyncSymComManager {
+public class JsonObjectSymComManager {
 	private SymComManager scm = SymComManager.getInstance();
+	private Gson gson = new Gson();
 	
 	protected CommunicationEventListener communicationEventListener = null;
 	
+	public String createComputerObject(String computerName, String computerManufacturer) {
+		Computer computer = new Computer(computerName, computerManufacturer);
+		return gson.toJson(computer);
+	}
+	
 	// FIXME: pourquoi SendRequest doit retourner un String ? Est-ce obligatoire ?
-	public void sendRequest(String content, String url) throws Exception {
+	public void sendRequest(String jsonObject, String url) throws Exception {
 		//Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
 		
 		if (communicationEventListener == null) {
@@ -18,9 +25,10 @@ public class AsyncSymComManager {
 		}
 		
 		Headers.Builder headersBuilder = new Headers.Builder();
-		headersBuilder.add("content-type", "plain/text");
+		headersBuilder.add("content-type", "application/json")
+				.add("accept", "application/json");
 		
-		scm.sendRequest(content, url, "text/plain; charset=utf-8", headersBuilder.build(), new Callback() {
+		scm.sendRequest(jsonObject, url, "application/json; charset=utf-8", headersBuilder.build(), new Callback() {
 			@Override
 			public void onFailure(Call call, IOException e) {
 				e.printStackTrace();

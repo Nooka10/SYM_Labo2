@@ -1,7 +1,7 @@
 package com.labo2.sym.symlabo2;
 
-import SymComManager.AsyncSymComManager;
 import SymComManager.CommunicationEventListener;
+import SymComManager.JsonObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -55,12 +55,15 @@ public class ObjectSendFragment extends MainFragment {
 		bigJsonSendButton = (Button) view.findViewById(R.id.objectFragmentBigJsonSendButton);
 		responseTextView = (TextView) view.findViewById(R.id.objectFragmentResponseFromServerTextView);
 		
+		
 		// On set l'action à effectuer lorsque le bouton est pressé.
 		jsonSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					AsyncSymComManager scm = new AsyncSymComManager();
+					JsonObjectSymComManager scm = new JsonObjectSymComManager();
+					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
+							computerManufacturerEditText.getText().toString());
 					
 					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
@@ -77,7 +80,7 @@ public class ObjectSendFragment extends MainFragment {
 					});
 					
 					// On envoit la requête au serveur
-					scm.sendRequest(computerManufacturerEditText.getText().toString(), "http://sym.iict.ch/rest/txt");
+					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
 					
 				} catch (Exception e) {
 					e.printStackTrace();

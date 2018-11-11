@@ -20,20 +20,20 @@ class SymComManager {
 	private SymComManager() {
 	}
 	
-	Request createRequest(String content, String url) {
+	Request createRequest(String content, String url, String applicationType, Headers headers) {
 		// Check URL
 		if (url.isEmpty()) {
 			throw new IllegalArgumentException("URL cannot be empty");
 		}
 		
 		RequestBody requestBody = RequestBody.create(
-				MediaType.parse("text/plain; charset=utf-8"),
+				MediaType.parse(applicationType),
 				content
 		);
 		return new Request.Builder()
 				.url(url)
 				.post(requestBody)
-				.addHeader("content-type", "plain/text")
+				.headers(headers)
 				// FIXME: j'arrive pas à configurer ces entêtes....?!
 				// .addHeader("X-Network", "[CSD, GPRS, EDGE, UMTS, HSPA, LTE]")
 				// .addHeader("X-Content-Encoding", "deflate")
@@ -44,8 +44,8 @@ class SymComManager {
 		return okHttpClient;
 	}
 	
-	void sendRequest(String content, String url, Callback callback) {
-		Request request = createRequest(content, url);
+	void sendRequest(String content, String url, String mediaType, Headers headers, Callback callback) {
+		Request request = createRequest(content, url, mediaType, headers);
 		
 		okHttpClient.newCall(request).enqueue(callback);
 	}
