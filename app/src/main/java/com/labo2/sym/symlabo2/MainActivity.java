@@ -95,8 +95,10 @@ public class MainActivity extends AppCompatActivity
 			fragmentClass = AsyncSendFragment.class;
 		} else if (id == R.id.delayedSend) {
 			fragmentClass = DelayedSendFragment.class;
-		} else if (id == R.id.objectSend) {
-			fragmentClass = ObjectSendFragment.class;
+		} else if (id == R.id.jsonObjectSend) {
+			fragmentClass = JsonObjectSendFragment.class;
+		} else if (id == R.id.xmlObjectSend) {
+			fragmentClass = XmlObjectSendFragment.class;
 		} else if (id == R.id.compressedSend) {
 			//fragmentClass = FragmentOne.class;
 		}

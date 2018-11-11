@@ -33,16 +33,29 @@
 		/>
 
 	<Button
-		android:id="@+id/mainFragment_ObjectButton"
+		android:id="@+id/mainFragment_JsonObjectButton"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="16dp"
 		android:layout_marginRight="16dp"
 		android:layout_marginTop="32dp"
-		android:text="@string/objectSend"
+		android:text="@string/jsonObjectSend"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/mainFragment_DelayedButton"
+		/>
+
+	<Button
+		android:id="@+id/mainFragment_XmlObjectButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="16dp"
+		android:layout_marginRight="16dp"
+		android:layout_marginTop="32dp"
+		android:text="@string/xmlObjectSend"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/mainFragment_JsonObjectButton"
 		/>
 
 	<Button
@@ -55,6 +68,6 @@
 		android:text="@string/compressedSend"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/mainFragment_ObjectButton"
+		app:layout_constraintTop_toBottomOf="@+id/mainFragment_XmlObjectButton"
 		/>
 </android.support.constraint.ConstraintLayout>

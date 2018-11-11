@@ -23,7 +23,8 @@ public class MainFragment extends Fragment {
 	
 	private Button asyncSendButton = null;
 	private Button delayedButton = null;
-	private Button objectButton = null;
+	private Button jsonObjectButton = null;
+	private Button xmlObjectButton = null;
 	private Button compressedButton = null;
 	
 	private OnFragmentInteractionListener mListener;
@@ -51,20 +52,21 @@ public class MainFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		
 		asyncSendButton = (Button) view.findViewById(R.id.mainFragment_AsyncButton);
 		delayedButton = (Button) view.findViewById(R.id.mainFragment_DelayedButton);
-		objectButton = (Button) view.findViewById(R.id.mainFragment_ObjectButton);
+		jsonObjectButton = (Button) view.findViewById(R.id.mainFragment_JsonObjectButton);
+		xmlObjectButton = (Button) view.findViewById(R.id.mainFragment_XmlObjectButton);
 		compressedButton = (Button) view.findViewById(R.id.mainFragment_CompressedButton);
 		
 		setButtonOnClickListener(asyncSendButton, 1);
 		setButtonOnClickListener(delayedButton, 2);
-		setButtonOnClickListener(objectButton, 3);
-		setButtonOnClickListener(compressedButton, 4);
+		setButtonOnClickListener(jsonObjectButton, 3);
+		setButtonOnClickListener(xmlObjectButton, 4);
+		setButtonOnClickListener(compressedButton, 5);
 		
 		return view;
 	}
@@ -76,12 +78,6 @@ public class MainFragment extends Fragment {
 				((MainActivity)getActivity()).setSelectedNavigationItem(idButton);
 			}
 		});
-	}
-	
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onFragmentInteraction(uri);
-		}
 	}
 	
 	@Override

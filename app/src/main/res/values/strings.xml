@@ -7,7 +7,8 @@
 	<string name="nav_header_desc">Navigation header</string>
 	<string name="action_settings">Settings</string>
 	<string name="compressedSend">Compressed transmission</string>
-	<string name="objectSend">Object transmission</string>
+	<string name="jsonObjectSend">JSON object transmission</string>
+	<string name="xmlObjectSend">XML object transmission</string>
 	<string name="delayedSend">Delayed transmission</string>
 	<string name="asynchronousSend">Asynchronous transmission</string>
 	<string name="main">Home</string>
@@ -27,13 +28,27 @@
 	<string name="delayedFragment_ResponseTitleTextView">Response from server</string>
 	<string name="delayedFragment_ResponseContentTextView">No response yet.</string>
 
-	<string name="objectFragment_objectContentTextView">Object Content</string>
-	<string name="objectFragment_computerNameEditText">Computer name</string>
-	<string name="objectFragment_computerManufacturerEditText">Computer manufacturer</string>
-	<string name="objectFragment_sendJsonObjectButton">Send Computer as JSON object</string>
-	<string name="objectFragment_sendXmlObjectButton">Send computer as XML object</string>
-	<string name="objectFragment_sendBigJsonObjectButton">Send big JSON object</string>
-	<string name="objectFragment_responseTitleTextView">Response from server</string>
-	<string name="objectFragment_ResponseContentTextView">No response yet.</string>
+	<string name="jsonObjectFragment_objectContentTextView">Object Content</string>
+	<string name="jsonObjectFragment_computerNameEditText">Computer name</string>
+	<string name="jsonObjectFragment_computerManufacturerEditText">Computer manufacturer</string>
+	<string name="jsonObjectFragment_sendJsonObjectButton">Send Computer as JSON object</string>
+	<string name="jsonObjectFragment_sendBigJsonObjectButton">Send big JSON object</string>
+	<string name="jsonObjectFragment_responseTitleTextView">Response from server</string>
+	<string name="jsonObjectFragment_ResponseContentTextView">No response yet.</string>
 
+	<string name="xmlObjectFragment_objectContentTextView">Object Content</string>
+	<string name="xmlObjectFragment_firstnameEditText">Firstname</string>
+	<string name="xmlObjectFragment_lastnameEditText">Lastname</string>
+	<string name="xmlObjectFragment_middlenameEditText">Middlename</string>
+	<string name="xmlObjectFragment_phoneEditText">Phone number</string>
+	<string name="xmlObjectFragment_isMaleRadioButton">Male</string>
+	<string name="xmlObjectFragment_isFemaleRadioButton">Female</string>
+	<string name="xmlObjectFragment_sendXmlObjectButton">Send computer as XML object</string>
+	<string name="xmlObjectFragment_responseTitleTextView">Response from server</string>
+	<string name="xmlObjectFragment_ResponseContentTextView">No response yet.</string>
+	<string-array name="phoneTypeArray">
+		<item>home</item>
+		<item>work</item>
+		<item>mobile</item>
+	</string-array>
 </resources>

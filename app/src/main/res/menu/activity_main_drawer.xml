@@ -17,9 +17,13 @@
 			android:icon="@drawable/ic_two"
 			android:title="@string/delayedSend"/>
 		<item
-			android:id="@+id/objectSend"
+			android:id="@+id/jsonObjectSend"
 			android:icon="@drawable/ic_tree"
-			android:title="@string/objectSend"/>
+			android:title="@string/jsonObjectSend"/>
+		<item
+			android:id="@+id/xmlObjectSend"
+			android:icon="@drawable/ic_tree"
+			android:title="@string/xmlObjectSend"/>
 		<item
 			android:id="@+id/compressedSend"
 			android:icon="@drawable/ic_four"

@@ -1,21 +1,21 @@
 package SymComManager;
 
 import SymComManager.Objects.Computer;
+import SymComManager.Objects.Person;
 import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
 
-public class JsonObjectSymComManager {
+public class XmlObjectSymComManager {
 	private SymComManager scm = SymComManager.getInstance();
-	private Gson gson = new Gson();
 	
 	private CommunicationEventListener communicationEventListener = null;
 	
-	public String createComputerObject(String computerName, String computerManufacturer) {
-		Computer computer = new Computer(computerName, computerManufacturer);
-		return gson.toJson(computer);
+	public String createPersonObject(Person person) {
+		
+		return null;
 	}
 	
 	// FIXME: pourquoi SendRequest doit retourner un String ? Est-ce obligatoire ?

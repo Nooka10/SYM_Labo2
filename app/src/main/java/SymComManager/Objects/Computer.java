@@ -1,4 +1,4 @@
-package SymComManager;
+package SymComManager.Objects;
 
 /**
  * Modèle de données utilisé pour la transmission d'objet JSON
