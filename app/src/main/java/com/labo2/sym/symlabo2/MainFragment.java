@@ -25,6 +25,7 @@ public class MainFragment extends Fragment {
 	private Button delayedButton = null;
 	private Button jsonObjectButton = null;
 	private Button xmlObjectButton = null;
+	private Button graphQlObjectButton = null;
 	private Button compressedButton = null;
 	
 	private OnFragmentInteractionListener mListener;
@@ -60,13 +61,15 @@ public class MainFragment extends Fragment {
 		delayedButton = (Button) view.findViewById(R.id.mainFragment_DelayedButton);
 		jsonObjectButton = (Button) view.findViewById(R.id.mainFragment_JsonObjectButton);
 		xmlObjectButton = (Button) view.findViewById(R.id.mainFragment_XmlObjectButton);
+		graphQlObjectButton = (Button) view.findViewById(R.id.mainFragment_GraphQLObjectButton);
 		compressedButton = (Button) view.findViewById(R.id.mainFragment_CompressedButton);
 		
 		setButtonOnClickListener(asyncSendButton, 1);
 		setButtonOnClickListener(delayedButton, 2);
 		setButtonOnClickListener(jsonObjectButton, 3);
 		setButtonOnClickListener(xmlObjectButton, 4);
-		setButtonOnClickListener(compressedButton, 5);
+		setButtonOnClickListener(graphQlObjectButton, 5);
+		setButtonOnClickListener(compressedButton, 6);
 		
 		return view;
 	}

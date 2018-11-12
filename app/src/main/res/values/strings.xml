@@ -51,4 +51,8 @@
 		<item id="1">work</item>
 		<item id="2">mobile</item>
 	</string-array>
+
+	<string name="graphqlFragment_SelectAuthorTextView">Select an author</string>
+	<string name="graphqlFragment_AuthorPostsTextView">Author\'s posts</string>
+	<string name="graphqlObjectSend">GraphQL Object transmission</string>
 </resources>

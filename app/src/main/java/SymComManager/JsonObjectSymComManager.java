@@ -22,6 +22,7 @@ public class JsonObjectSymComManager {
 	public void sendRequest(String jsonObject, String url) throws Exception {
 		//Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
 		
+		// FIXME: Comment prendre en charge les erreur? -> afficher une popup, ne rien faire.....?
 		if (communicationEventListener == null) {
 			throw new Exception("You have to call setCommunicationEventListener(CommunicationEventListener l) first to be allowed to send a request.");
 		}

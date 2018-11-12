@@ -12,6 +12,7 @@ public class XmlObjectSymComManager {
 	private CommunicationEventListener communicationEventListener = null;
 	
 	private String createXML(Person person) {
+		// FIXME: La DTD accepte plusieurs n° de téléphone --> doit-on proposer à l'utilisateur d'en entrer plusieurs graphiquement?
 		StringBuilder xml = new StringBuilder();
 		xml.append("<?xml version='1.0' encoding='UTF-8'?>\n")
 				.append("<!DOCTYPE directory SYSTEM \"http://sym.iict.ch/directory.dtd\">")

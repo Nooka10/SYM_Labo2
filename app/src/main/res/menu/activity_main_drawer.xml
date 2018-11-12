@@ -25,6 +25,10 @@
 			android:icon="@drawable/ic_tree"
 			android:title="@string/xmlObjectSend"/>
 		<item
+			android:id="@+id/graphqlObjectSend"
+			android:icon="@drawable/ic_tree"
+			android:title="@string/graphqlObjectSend"/>
+		<item
 			android:id="@+id/compressedSend"
 			android:icon="@drawable/ic_four"
 			android:title="@string/compressedSend"/>

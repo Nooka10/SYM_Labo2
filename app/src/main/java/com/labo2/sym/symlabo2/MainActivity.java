@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity
 			fragmentClass = JsonObjectSendFragment.class;
 		} else if (id == R.id.xmlObjectSend) {
 			fragmentClass = XmlObjectSendFragment.class;
+		} else if (id == R.id.graphqlObjectSend) {
+			fragmentClass = GraphQLFragment.class;
 		} else if (id == R.id.compressedSend) {
 			//fragmentClass = FragmentOne.class;
 		}

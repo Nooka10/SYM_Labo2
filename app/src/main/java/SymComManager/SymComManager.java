@@ -20,7 +20,7 @@ class SymComManager {
 	private SymComManager() {
 	}
 	
-	Request createRequest(String content, String url, String applicationType, Headers headers) {
+	private Request createRequest(String content, String url, String applicationType, Headers headers) {
 		// Check URL
 		if (url.isEmpty()) {
 			throw new IllegalArgumentException("URL cannot be empty");
@@ -34,7 +34,7 @@ class SymComManager {
 				.url(url)
 				.post(requestBody)
 				.headers(headers)
-				// FIXME: j'arrive pas à configurer ces entêtes....?!
+				// FIXME: j'arrive pas à configurer ces entêtes.... À quoi servent-elle et sont-elles obligatoires?
 				// .addHeader("X-Network", "[CSD, GPRS, EDGE, UMTS, HSPA, LTE]")
 				// .addHeader("X-Content-Encoding", "deflate")
 				.build();
