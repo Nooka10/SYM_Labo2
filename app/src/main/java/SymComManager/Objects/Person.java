@@ -5,17 +5,65 @@ package SymComManager.Objects;
  */
 public class Person {
 	private String firstname;
-	private String name;
+	private String lastname;
 	private String middlename;
-	private Enum gender;
 	private String phone;
+	private Sex sex;
+	private PhoneType phoneType;
 	
-	public Person(String firstname, String name, String middlename, Enum gender, String phone) {
+	private enum Sex {
+		MALE("male"),
+		FEMALE("female");
+		
+		private final String sex;
+		
+		Sex(String sex) {
+			this.sex = sex;
+		}
+		
+		@Override
+		public String toString() {
+			return sex;
+		}
+	}
+	
+	private enum PhoneType {
+		HOME("home"),
+		WORK("work"),
+		MOBILE("mobile");
+		
+		private final String phoneType;
+		
+		PhoneType(String phoneType) {
+			this.phoneType = phoneType;
+		}
+		
+		@Override
+		public String toString() {
+			return phoneType;
+		}
+	}
+	
+	public Person(String firstname, String lastname, boolean isMale, String middlename, String phonenumber, String phonetype) {
 		this.firstname = firstname;
-		this.name = name;
+		this.lastname = lastname;
 		this.middlename = middlename;
-		this.gender = gender;
-		this.phone = phone;
+		this.sex = isMale ? Person.Sex.MALE : Person.Sex.FEMALE;
+		this.phone = phonenumber;
+		
+		switch (phonetype) {
+			case "home":
+				this.phoneType = Person.PhoneType.HOME;
+				break;
+			case "work":
+				this.phoneType = Person.PhoneType.WORK;
+				break;
+			case "mobile":
+				this.phoneType = Person.PhoneType.MOBILE;
+				break;
+			default:
+				throw new IllegalArgumentException("Unknown enum value for Person.PhoneType. Should be 'home', 'work' or 'mobile'. Received : " + phonetype);
+		}
 	}
 	
 	public String getFirstname() {
@@ -26,12 +74,12 @@ public class Person {
 		this.firstname = firstname;
 	}
 	
-	public String getName() {
-		return name;
+	public String getLastname() {
+		return lastname;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setLastname(String name) {
+		this.lastname = name;
 	}
 	
 	public String getMiddlename() {
@@ -42,20 +90,28 @@ public class Person {
 		this.middlename = middlename;
 	}
 	
-	public Enum getGender() {
-		return gender;
-	}
-	
-	public void setGender(Enum gender) {
-		this.gender = gender;
-	}
-	
 	public String getPhone() {
 		return phone;
 	}
 	
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public Sex getSex() {
+		return sex;
+	}
+	
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+	
+	public PhoneType getPhoneType() {
+		return phoneType;
+	}
+	
+	public void setPhoneType(PhoneType phoneType) {
+		this.phoneType = phoneType;
 	}
 }
 

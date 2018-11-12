@@ -2,6 +2,8 @@ package com.labo2.sym.symlabo2;
 
 import SymComManager.CommunicationEventListener;
 import SymComManager.JsonObjectSymComManager;
+import SymComManager.Objects.Person;
+import SymComManager.XmlObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +25,7 @@ public class XmlObjectSendFragment extends MainFragment {
 	
 	private EditText firstname = null;
 	private EditText lastname = null;
-	private RadioGroup sex = null;
+	private RadioButton isMale= null;
 	private EditText middlename = null;
 	private EditText phonenumber = null;
 	private Spinner phoneType = null;
@@ -51,7 +53,7 @@ public class XmlObjectSendFragment extends MainFragment {
 		firstname = (EditText) view.findViewById(R.id.xmlObjectFragmentFirstnameEditText);
 		lastname = (EditText) view.findViewById(R.id.xmlObjectFragmentLastnameEditText);
 		middlename = (EditText) view.findViewById(R.id.xmlObjectFragmentMiddlenameEditText);
-		sex = (RadioGroup) view.findViewById(R.id.xmlObjectFragmentSexRadioGroup);
+		isMale = (RadioButton) view.findViewById(R.id.isMale);
 		phonenumber = (EditText) view.findViewById(R.id.xmlObjectFragmentPhoneEditText);
 		phoneType = (Spinner) view.findViewById(R.id.xmlObjectFragmentPhoneTypeSpinner);
 		xmlSendButton = (Button) view.findViewById(R.id.xmlObjectFragmentSendJsonObjectButton);
@@ -70,9 +72,10 @@ public class XmlObjectSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					JsonObjectSymComManager scm = new JsonObjectSymComManager();
-					String computerObject = scm.createComputerObject(firstname.getText().toString(),
-							lastname.getText().toString());
+					XmlObjectSymComManager scm = new XmlObjectSymComManager();
+					Person person = new Person(firstname.getText().toString(), lastname.getText().toString(),
+							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),
+							phoneType.getSelectedItem().toString());
 					
 					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
@@ -89,7 +92,7 @@ public class XmlObjectSendFragment extends MainFragment {
 					});
 					
 					// On envoit la requête au serveur
-					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
+ 					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
 					
 				} catch (Exception e) {
 					e.printStackTrace();

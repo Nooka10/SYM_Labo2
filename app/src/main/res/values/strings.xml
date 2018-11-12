@@ -47,8 +47,8 @@
 	<string name="xmlObjectFragment_responseTitleTextView">Response from server</string>
 	<string name="xmlObjectFragment_ResponseContentTextView">No response yet.</string>
 	<string-array name="phoneTypeArray">
-		<item>home</item>
-		<item>work</item>
-		<item>mobile</item>
+		<item id="0">home</item>
+		<item id="1">work</item>
+		<item id="2">mobile</item>
 	</string-array>
 </resources>

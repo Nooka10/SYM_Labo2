@@ -122,7 +122,7 @@
 		app:layout_constraintStart_toEndOf="@+id/xmlObjectFragmentPhoneEditText"
 		app:layout_constraintBottom_toBottomOf="@+id/xmlObjectFragmentPhoneEditText"
 		app:layout_constraintTop_toTopOf="@+id/xmlObjectFragmentPhoneEditText"
-		></Spinner>
+		/>
 
 	<Button
 		android:id="@+id/xmlObjectFragmentSendJsonObjectButton"
