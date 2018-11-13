@@ -13,7 +13,7 @@
 	<TextView
 		android:id="@+id/graphqlFragmentTextView"
 		android:text="@string/graphqlFragment_SelectAuthorTextView"
-		android:layout_height="0dp"
+		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="8dp"
@@ -22,31 +22,32 @@
 		app:layout_constraintEnd_toStartOf="@+id/graphqlFragment_authorsSpinner"
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintBottom_toBottomOf="@+id/graphqlFragment_authorsSpinner"
-		/>
-
-	<TextView
-		android:id="@+id/graphqlFragmentTextView2"
-		android:text="@string/graphqlFragment_AuthorPostsTextView"
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"
-		android:layout_marginTop="16dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginEnd="16dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintTop_toBottomOf="@+id/graphqlFragmentTextView"/>
+		android:textSize="18sp"
+		android:textAlignment="viewStart"/>
 
 	<Spinner
 		android:id="@+id/graphqlFragment_authorsSpinner"
 		android:layout_width="0dp"
-		android:layout_height="wrap_content"
+		android:layout_height="30dp"
 		android:layout_marginTop="16dp"
 		android:layout_marginEnd="16dp"
 		android:layout_marginStart="8dp"
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@+id/graphqlFragmentTextView"/>
+
+	<TextView
+		android:id="@+id/graphqlFragmentTextView2"
+		android:text="@string/graphqlFragment_AuthorPostsTextView"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_marginTop="24dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginEnd="16dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintTop_toBottomOf="@+id/graphqlFragment_authorsSpinner"/>
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/graphqlFragment_authorPostsRecyclerView"

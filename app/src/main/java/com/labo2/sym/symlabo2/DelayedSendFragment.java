@@ -5,6 +5,7 @@ import SymComManager.DelayedSymComManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class DelayedSendFragment extends MainFragment {
 		delayedSendButton = (Button) view.findViewById(R.id.delayedFragmentSendButton);
 		editTextToSend = (EditText) view.findViewById(R.id.delayedFragmentInputEditText);
 		responseTextView = (TextView) view.findViewById(R.id.delayedFragmentResponseFromServerTextView);
+		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// On set l'action à effectuer lorsque le bouton est pressé.
 		delayedSendButton.setOnClickListener(new View.OnClickListener() {

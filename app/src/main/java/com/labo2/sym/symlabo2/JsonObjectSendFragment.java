@@ -5,6 +5,7 @@ import SymComManager.JsonObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class JsonObjectSendFragment extends MainFragment {
 		jsonSendButton = (Button) view.findViewById(R.id.jsonObjectFragmentSendJsonObjectButton);
 		bigJsonSendButton = (Button) view.findViewById(R.id.jsonObjectFragmentBigJsonSendButton);
 		responseTextView = (TextView) view.findViewById(R.id.jsonObjectFragmentResponseFromServerTextView);
-		
+		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// On set l'action à effectuer lorsque le bouton est pressé.
 		jsonSendButton.setOnClickListener(new View.OnClickListener() {

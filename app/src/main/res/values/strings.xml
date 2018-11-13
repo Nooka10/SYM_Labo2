@@ -55,4 +55,11 @@
 	<string name="graphqlFragment_SelectAuthorTextView">Select an author</string>
 	<string name="graphqlFragment_AuthorPostsTextView">Author\'s posts</string>
 	<string name="graphqlObjectSend">GraphQL Object transmission</string>
+	<string name="cardDescription">Description</string>
+	<string name="cardDate">Date</string>
+	<string name="CardTitle">Title</string>
+	<string name="cardContent">Content</string>
+
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

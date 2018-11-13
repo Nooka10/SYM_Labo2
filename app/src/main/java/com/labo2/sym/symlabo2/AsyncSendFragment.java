@@ -5,6 +5,7 @@ import SymComManager.CommunicationEventListener;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class AsyncSendFragment extends MainFragment {
 		asyncSendButton = (Button) view.findViewById(R.id.asyncFragmentSendButton);
 		editTextToSend = (EditText) view.findViewById(R.id.asyncFragmentInputEditText);
 		responseTextView = (TextView) view.findViewById(R.id.asyncFragmentResponseFromServerTextView);
+		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// On set l'action à effectuer lorsque le bouton est pressé.
 		asyncSendButton.setOnClickListener(new View.OnClickListener() {

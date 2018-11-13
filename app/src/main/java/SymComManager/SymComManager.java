@@ -2,6 +2,7 @@ package SymComManager;
 
 import okhttp3.*;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 class SymComManager {
@@ -17,11 +18,9 @@ class SymComManager {
 			.readTimeout(30, TimeUnit.SECONDS)
 			.build();
 	
-	private SymComManager() {
-	}
+	private SymComManager() { }
 	
 	private Request createRequest(String content, String url, String applicationType, Headers headers) {
-		// Check URL
 		if (url.isEmpty()) {
 			throw new IllegalArgumentException("URL cannot be empty");
 		}
@@ -34,19 +33,12 @@ class SymComManager {
 				.url(url)
 				.post(requestBody)
 				.headers(headers)
-				// FIXME: j'arrive pas à configurer ces entêtes.... À quoi servent-elle et sont-elles obligatoires?
-				// .addHeader("X-Network", "[CSD, GPRS, EDGE, UMTS, HSPA, LTE]")
-				// .addHeader("X-Content-Encoding", "deflate")
 				.build();
 	}
 	
-	OkHttpClient getOkHttpClient() {
-		return okHttpClient;
-	}
-	
-	void sendRequest(String content, String url, String mediaType, Headers headers, Callback callback) {
+	Response sendRequest(String content, String url, String mediaType, Headers headers) throws IOException {
 		Request request = createRequest(content, url, mediaType, headers);
 		
-		okHttpClient.newCall(request).enqueue(callback);
+		return okHttpClient.newCall(request).execute();
 	}
 }

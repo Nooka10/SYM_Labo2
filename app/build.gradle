@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
 	compileSdkVersion 28
 	defaultConfig {
-		// FIXME: pourquoi c'est en jaune?
 		applicationId "com.labo2.sym.symlabo2"
 		minSdkVersion 21
 		targetSdkVersion 28

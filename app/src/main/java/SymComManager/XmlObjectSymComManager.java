@@ -1,18 +1,12 @@
 package SymComManager;
 
 import SymComManager.Objects.Person;
-import android.support.annotation.NonNull;
-import okhttp3.*;
-
-import java.io.IOException;
+import okhttp3.Headers;
 
 public class XmlObjectSymComManager {
-	private SymComManager scm = SymComManager.getInstance();
-	
 	private CommunicationEventListener communicationEventListener = null;
 	
 	private String createXML(Person person) {
-		// FIXME: La DTD accepte plusieurs n° de téléphone --> doit-on proposer à l'utilisateur d'en entrer plusieurs graphiquement?
 		StringBuilder xml = new StringBuilder();
 		xml.append("<?xml version='1.0' encoding='UTF-8'?>\n")
 				.append("<!DOCTYPE directory SYSTEM \"http://sym.iict.ch/directory.dtd\">")
@@ -32,7 +26,6 @@ public class XmlObjectSymComManager {
 		return xml.toString();
 	}
 	
-	// FIXME: pourquoi SendRequest doit retourner un String ? Est-ce obligatoire ?
 	public void sendRequest(Person personObjectToSend, String url) throws Exception {
 		//Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
 		
@@ -40,28 +33,11 @@ public class XmlObjectSymComManager {
 			throw new Exception("You have to call setCommunicationEventListener(CommunicationEventListener l) first to be allowed to send a request.");
 		}
 		
-		String xml = createXML(personObjectToSend);
-		
 		Headers.Builder headersBuilder = new Headers.Builder();
 		headersBuilder.add("content-type", "application/xml");
 		
-		scm.sendRequest(xml, url, "application/xml; charset=utf-8", headersBuilder.build(), new Callback() {
-			@Override
-			public void onFailure(@NonNull Call call, @NonNull IOException e) {
-				e.printStackTrace();
-			}
-			
-			@Override
-			public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-				try (ResponseBody responseBody = response.body()) {
-					if (!response.isSuccessful()) {
-						throw new IOException("Unexpected code " + response);
-					} else {
-						communicationEventListener.handleServerResponse(responseBody.string());
-					}
-				}
-			}
-		});
+		String xml = createXML(personObjectToSend);
+		new MyAsyncTask(xml, url, "application/xml; charset=utf-8", headersBuilder.build(), communicationEventListener).execute();
 	}
 	
 	public void setCommunicationEventListener(CommunicationEventListener l) {

@@ -1,12 +1,12 @@
 package com.labo2.sym.symlabo2;
 
 import SymComManager.CommunicationEventListener;
-import SymComManager.JsonObjectSymComManager;
 import SymComManager.Objects.Person;
 import SymComManager.XmlObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +58,7 @@ public class XmlObjectSendFragment extends MainFragment {
 		phoneType = (Spinner) view.findViewById(R.id.xmlObjectFragmentPhoneTypeSpinner);
 		xmlSendButton = (Button) view.findViewById(R.id.xmlObjectFragmentSendJsonObjectButton);
 		responseTextView = (TextView) view.findViewById(R.id.xmlObjectFragmentResponseFromServerTextView);
+		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.phoneTypeArray, android.R.layout.simple_spinner_item);
