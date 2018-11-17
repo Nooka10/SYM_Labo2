@@ -12,7 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.labo2.sym.symlabo2.GraphQLFragment.GraphQLSendFragment;
 
+/**
+ * Activité principale démarrée automatiquement au lancement de l'application.
+ */
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener, MainFragment.OnFragmentInteractionListener {
 	
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity
 		
 		if (savedInstanceState == null) {
 			try {
+				// initialisation du MainFragment
 				Fragment fragment = (Fragment) MainFragment.class.newInstance();
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
@@ -33,13 +38,13 @@ public class MainActivity extends AppCompatActivity
 			}
 			
 		}
-		
+		// initialisation du drawer
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 		
+		// initialisation de la NavigationView
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		navigationView.getMenu().getItem(0).setChecked(true);
@@ -77,7 +82,11 @@ public class MainActivity extends AppCompatActivity
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void setSelectedNavigationItem(int idItemToSelect) {
+	/**
+	 * Sélectionne le bouton du menu correspondant à l'id reçu en paramètre.
+	 * @param idItemToSelect, l'id de l'item du menu à sélectionner.
+	 */
+	void setSelectedNavigationItem(int idItemToSelect) {
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		onNavigationItemSelected(navigationView.getMenu().getItem(idItemToSelect).setChecked(true));
 	}
@@ -100,12 +109,13 @@ public class MainActivity extends AppCompatActivity
 		} else if (id == R.id.xmlObjectSend) {
 			fragmentClass = XmlObjectSendFragment.class;
 		} else if (id == R.id.graphqlObjectSend) {
-			fragmentClass = GraphQLFragment.class;
+			fragmentClass = GraphQLSendFragment.class;
 		} else if (id == R.id.compressedSend) {
 			fragmentClass = CompressedSendFragment.class;
 		}
 		
 		try {
+			// FIXME: faut-il faire quelque chose pour tout ces risque de nullpointer?
 			fragment = (Fragment) fragmentClass.newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();

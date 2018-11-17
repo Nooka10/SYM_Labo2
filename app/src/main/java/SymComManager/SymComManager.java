@@ -8,6 +8,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.Deflater;
 import java.util.zip.DeflaterOutputStream;
 
+/**
+ *
+ */
 class SymComManager {
 	private static SymComManager ourInstance = new SymComManager();
 	

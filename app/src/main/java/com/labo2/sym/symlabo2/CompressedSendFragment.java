@@ -23,7 +23,6 @@ public class CompressedSendFragment extends MainFragment {
 	private EditText computerManufacturerEditText = null;
 	private Button compressedSendButton = null;
 	private TextView responseTextView = null;
-	
 	private OnFragmentInteractionListener mListener;
 	
 	public CompressedSendFragment() {
@@ -48,7 +47,7 @@ public class CompressedSendFragment extends MainFragment {
 		responseTextView = (TextView) view.findViewById(R.id.compressedFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
-		// On set l'action à effectuer lorsque le bouton est pressé.
+		// on set l'action à effectuer lorsque le bouton est pressé.
 		compressedSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -57,14 +56,13 @@ public class CompressedSendFragment extends MainFragment {
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
 					
-					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
+					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
 						@Override
 						public boolean handleServerResponse(final String response) {
 							getActivity().runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									
 									responseTextView.setText(response);
 								}
 							});
@@ -72,7 +70,7 @@ public class CompressedSendFragment extends MainFragment {
 						}
 					});
 					
-					// On envoit la requête au serveur
+					// on envoit la requête au serveur
 					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
 					
 				} catch (Exception e) {

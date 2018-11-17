@@ -1,7 +1,9 @@
 package SymComManager.Objects;
 
+import android.support.annotation.NonNull;
+
 /**
- * Modèle de données utilisé pour la transmission d'objet JSON
+ * Classe définissant une personne, utilisée dans la partie XML.
  */
 public class Person {
 	private String firstname;
@@ -11,6 +13,9 @@ public class Person {
 	private Sex sex;
 	private PhoneType phoneType;
 	
+	/**
+	 * Énumération des sex valides.
+	 */
 	private enum Sex {
 		MALE("male"),
 		FEMALE("female");
@@ -21,12 +26,16 @@ public class Person {
 			this.sex = sex;
 		}
 		
+		@NonNull
 		@Override
 		public String toString() {
 			return sex;
 		}
 	}
 	
+	/**
+	 * Énumération des types de numéro de téléphone valides
+	 */
 	private enum PhoneType {
 		HOME("home"),
 		WORK("work"),
@@ -38,12 +47,22 @@ public class Person {
 			this.phoneType = phoneType;
 		}
 		
+		@NonNull
 		@Override
 		public String toString() {
 			return phoneType;
 		}
 	}
 	
+	/**
+	 * Constructeur.
+	 * @param firstname, le prénom de la personne.
+	 * @param lastname, le nom de la personne.
+	 * @param isMale, le sexe de la personne. Vaut true si c'est un homme, false sinon.
+	 * @param middlename, le 2ème prénom de la personne.
+	 * @param phonenumber, le numéro de téléphone de la personne.
+	 * @param phonetype, le type du numéro de téléphone de la personne. Doit être l'une des valeurs suivantes : ["home", "work", "mobile"]
+	 */
 	public Person(String firstname, String lastname, boolean isMale, String middlename, String phonenumber, String phonetype) {
 		this.firstname = firstname;
 		this.lastname = lastname;

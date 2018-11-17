@@ -10,14 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Classe gérant le fragment principal affiché au démarrage de l'application (chargé par la MainActivity) ou lorsque l'utilisateur sélectionne
+ * "Home" dans le menu.
  */
 public class MainFragment extends Fragment {
 	
@@ -34,19 +29,6 @@ public class MainFragment extends Fragment {
 		// Required empty public constructor
 	}
 	
-	/**
-	 * Use this factory method to create a new instance of
-	 * this fragment using the provided parameters.
-	 *
-	 * @return A new instance of fragment MainFragment.
-	 */
-	public static MainFragment newInstance(NavigationView navView) {
-		MainFragment fragment = new MainFragment();
-		Bundle args = new Bundle();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +39,7 @@ public class MainFragment extends Fragment {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		
+		// on récupère les éléments du fragment
 		asyncSendButton = (Button) view.findViewById(R.id.mainFragment_AsyncButton);
 		delayedButton = (Button) view.findViewById(R.id.mainFragment_DelayedButton);
 		jsonObjectButton = (Button) view.findViewById(R.id.mainFragment_JsonObjectButton);
@@ -64,6 +47,7 @@ public class MainFragment extends Fragment {
 		graphQlObjectButton = (Button) view.findViewById(R.id.mainFragment_GraphQLObjectButton);
 		compressedButton = (Button) view.findViewById(R.id.mainFragment_CompressedButton);
 		
+		// on lie les boutons avec les boutons du drawer associés afin d'ouvrir le fragment correspondant au bouton cliqué
 		setButtonOnClickListener(asyncSendButton, 1);
 		setButtonOnClickListener(delayedButton, 2);
 		setButtonOnClickListener(jsonObjectButton, 3);

@@ -13,14 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link JsonObjectSendFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link JsonObjectSendFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Json Object Transmission" dans le menu ou sur le fragment "Home".
  */
 public class JsonObjectSendFragment extends MainFragment {
 	
@@ -28,7 +22,6 @@ public class JsonObjectSendFragment extends MainFragment {
 	private EditText computerManufacturerEditText = null;
 	private Button jsonSendButton = null;
 	private TextView responseTextView = null;
-	
 	private OnFragmentInteractionListener mListener;
 	
 	public JsonObjectSendFragment() {
@@ -53,7 +46,7 @@ public class JsonObjectSendFragment extends MainFragment {
 		responseTextView = (TextView) view.findViewById(R.id.jsonObjectFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
-		// On set l'action à effectuer lorsque le bouton est pressé.
+		// on set l'action à effectuer lorsque le bouton est pressé
 		jsonSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -62,7 +55,7 @@ public class JsonObjectSendFragment extends MainFragment {
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
 					
-					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
+					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
 						@Override
 						public boolean handleServerResponse(final String response) {
@@ -76,7 +69,7 @@ public class JsonObjectSendFragment extends MainFragment {
 						}
 					});
 					
-					// On envoit la requête au serveur
+					// on envoit la requête au serveur
 					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
 					
 				} catch (Exception e) {

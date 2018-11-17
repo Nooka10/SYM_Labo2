@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Classe définissant un post, utilisée dans la partie GraphQL.
+ */
 public class Post {
 	private String title;
 	private String description;
@@ -13,6 +16,13 @@ public class Post {
 	private Date date;
 	private DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRANCE);
 	
+	/**
+	 * Constructeur.
+	 * @param title, le titre du post.
+	 * @param description, la description du post.
+	 * @param content, le contenu du post.
+	 * @param dateString, la date de création du post.
+	 */
 	public Post(String title, String description, String content, String dateString) {
 		this.title = title;
 		this.description = description;

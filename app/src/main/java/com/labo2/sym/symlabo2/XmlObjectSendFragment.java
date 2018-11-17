@@ -12,14 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link XmlObjectSendFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link XmlObjectSendFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "XML Object Transmission" dans le menu ou sur le fragment "Home".
  */
 public class XmlObjectSendFragment extends MainFragment {
 	

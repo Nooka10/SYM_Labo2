@@ -42,14 +42,14 @@ public class AsyncSendFragment extends MainFragment {
 		responseTextView = (TextView) view.findViewById(R.id.asyncFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
-		// On set l'action à effectuer lorsque le bouton est pressé.
+		// on set l'action à effectuer lorsque le bouton est pressé.
 		asyncSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
 					AsyncSymComManager scm = new AsyncSymComManager();
 					
-					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
+					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
 						@Override
 						public boolean handleServerResponse(final String response) {
@@ -63,9 +63,8 @@ public class AsyncSendFragment extends MainFragment {
 						}
 					});
 					
-					// On envoit la requête au serveur
+					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

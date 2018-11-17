@@ -1,31 +1,52 @@
 package SymComManager.Objects;
 
 /**
- * Modèle de données utilisé pour la transmission d'objet JSON
+ * Classe définissant un ordinateur, utilisée dans la partie Json et Compressed.
  */
 public class Computer {
 	private String name;
-	private String vendor;
+	private String manufacturer;
 	
-	public Computer(String name, String vendor) {
+	/**
+	 * Constructeur.
+	 * @param name, le nom de l'ordinateur.
+	 * @param manufacturer, le constructeur de l'ordinateur.
+	 */
+	public Computer(String name, String manufacturer) {
 		this.name = name;
-		this.vendor = vendor;
+		this.manufacturer = manufacturer;
 	}
 	
-	public String getVendor() {
-		return vendor;
-	}
-	
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
-	}
-	
+	/**
+	 * Getter du nom de l'ordinateur.
+	 * @return name, un String.
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Setter du nom de l'ordinateur.
+	 * @param name, le nom à donner à l'ordinateur.
+	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * Getter du constructeur de l'ordinateur.
+	 * @return manufacturer, un String.
+	 */
+	public String getManufacturer() {
+		return manufacturer;
+	}
+	
+	/**
+	 * Setter du constructeur de l'ordinateur.
+	 * @param manufacturer, le vendeur à donner à l'ordinateur.
+	 */
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 }
 

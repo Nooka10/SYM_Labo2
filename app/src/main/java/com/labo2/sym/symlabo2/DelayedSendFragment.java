@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Asynchronous Transmission" dans le menu ou sur le fragment "Home".
+ * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Delayed Transmission" dans le menu ou sur le fragment "Home".
  */
 public class DelayedSendFragment extends MainFragment {
 	
@@ -33,8 +33,7 @@ public class DelayedSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_delayed_send, container, false);
 		
@@ -44,14 +43,14 @@ public class DelayedSendFragment extends MainFragment {
 		responseTextView = (TextView) view.findViewById(R.id.delayedFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
-		// On set l'action à effectuer lorsque le bouton est pressé.
+		// on set l'action à effectuer lorsque le bouton est pressé.
 		delayedSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
 					DelayedSymComManager scm = new DelayedSymComManager(getActivity());
 					
-					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
+					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 					scm.setCommunicationEventListener(new CommunicationEventListener() {
 						@Override
 						public boolean handleServerResponse(final String response) {
@@ -65,14 +64,13 @@ public class DelayedSendFragment extends MainFragment {
 						}
 					});
 					
-					// On envoit la requête au serveur
+					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		
 		return view;
 	}
 	
