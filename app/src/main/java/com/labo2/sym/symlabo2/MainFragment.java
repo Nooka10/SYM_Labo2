@@ -3,7 +3,6 @@ package com.labo2.sym.symlabo2;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,12 +39,12 @@ public class MainFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		
 		// on récupère les éléments du fragment
-		asyncSendButton = (Button) view.findViewById(R.id.mainFragment_AsyncButton);
-		delayedButton = (Button) view.findViewById(R.id.mainFragment_DelayedButton);
-		jsonObjectButton = (Button) view.findViewById(R.id.mainFragment_JsonObjectButton);
-		xmlObjectButton = (Button) view.findViewById(R.id.mainFragment_XmlObjectButton);
-		graphQlObjectButton = (Button) view.findViewById(R.id.mainFragment_GraphQLObjectButton);
-		compressedButton = (Button) view.findViewById(R.id.mainFragment_CompressedButton);
+		asyncSendButton = view.findViewById(R.id.mainFragment_AsyncButton);
+		delayedButton = view.findViewById(R.id.mainFragment_DelayedButton);
+		jsonObjectButton = view.findViewById(R.id.mainFragment_JsonObjectButton);
+		xmlObjectButton = view.findViewById(R.id.mainFragment_XmlObjectButton);
+		graphQlObjectButton = view.findViewById(R.id.mainFragment_GraphQLObjectButton);
+		compressedButton = view.findViewById(R.id.mainFragment_CompressedButton);
 		
 		// on lie les boutons avec les boutons du drawer associés afin d'ouvrir le fragment correspondant au bouton cliqué
 		setButtonOnClickListener(asyncSendButton, 1);

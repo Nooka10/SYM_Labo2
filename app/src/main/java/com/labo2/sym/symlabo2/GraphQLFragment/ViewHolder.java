@@ -12,10 +12,10 @@ import com.labo2.sym.symlabo2.R;
  */
 class ViewHolder extends RecyclerView.ViewHolder {
 	
-	private TextView titleTextView;
-	private TextView dateTextView;
-	private TextView descriptionTextView;
-	private TextView contentTextView;
+	private final TextView titleTextView;
+	private final TextView dateTextView;
+	private final TextView descriptionTextView;
+	private final TextView contentTextView;
 	
 	/**
 	 * Constructeur
@@ -25,10 +25,10 @@ class ViewHolder extends RecyclerView.ViewHolder {
 		super(itemView);
 		
 		// on récupère les éléments de la view
-		titleTextView = (TextView) itemView.findViewById(R.id.cardTitle);
-		dateTextView = (TextView) itemView.findViewById(R.id.cardDate);
-		descriptionTextView = (TextView) itemView.findViewById(R.id.cardDescription);
-		contentTextView = (TextView) itemView.findViewById(R.id.cardContent);
+		titleTextView = itemView.findViewById(R.id.cardTitle);
+		dateTextView = itemView.findViewById(R.id.cardDate);
+		descriptionTextView = itemView.findViewById(R.id.cardDescription);
+		contentTextView = itemView.findViewById(R.id.cardContent);
 	}
 	
 	/**
@@ -37,8 +37,8 @@ class ViewHolder extends RecyclerView.ViewHolder {
 	 */
 	void bind(Post post) {
 		titleTextView.setText(post.getTitle());
-		// FIXME: comment transformer cette string en ressources ?
-		dateTextView.setText("Published the " + post.getDateString());
+		// FIXME: Je comprend pas ce qu'il me dit de faire... ^^
+		dateTextView.setText(R.string.ViewHolderDateText + post.getDateString());
 		descriptionTextView.setText(post.getDescription());
 		contentTextView.setText(post.getContent());
 	}

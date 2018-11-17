@@ -12,13 +12,13 @@ import java.util.zip.DeflaterOutputStream;
  *
  */
 class SymComManager {
-	private static SymComManager ourInstance = new SymComManager();
+	private static final SymComManager ourInstance = new SymComManager();
 	
 	static SymComManager getInstance() {
 		return ourInstance;
 	}
 	
-	private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+	private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
 			.connectTimeout(30, TimeUnit.SECONDS)
 			.writeTimeout(30, TimeUnit.SECONDS)
 			.readTimeout(30, TimeUnit.SECONDS)

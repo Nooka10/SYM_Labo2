@@ -10,11 +10,11 @@ import java.util.Locale;
  * Classe définissant un post, utilisée dans la partie GraphQL.
  */
 public class Post {
-	private String title;
-	private String description;
-	private String content;
+	private final String title;
+	private final String description;
+	private final String content;
 	private Date date;
-	private DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRANCE);
+	private final DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRANCE);
 	
 	/**
 	 * Constructeur.

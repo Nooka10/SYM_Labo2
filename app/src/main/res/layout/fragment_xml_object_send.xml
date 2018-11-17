@@ -25,6 +25,8 @@
 		android:ems="10"
 		android:inputType="textPersonName"
 		android:text="@string/xmlObjectFragment_firstnameEditText"
+		android:hint="@string/xmlObjectFragment_objectContentTextView"
+		android:labelFor="@string/xmlObjectFragment_objectContentTextView"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
@@ -42,6 +44,8 @@
 		android:ems="10"
 		android:inputType="textPersonName"
 		android:text="@string/xmlObjectFragment_lastnameEditText"
+		android:hint="@string/xmlObjectFragment_objectContentTextView"
+		android:labelFor="@string/xmlObjectFragment_objectContentTextView"
 		android:layout_marginTop="8dp"
 		android:layout_marginStart="8dp"
 		app:layout_constraintTop_toBottomOf="@+id/xmlObjectFragmentTextView"
@@ -55,6 +59,8 @@
 		android:ems="10"
 		android:inputType="textPersonName"
 		android:text="@string/xmlObjectFragment_middlenameEditText"
+		android:hint="@string/xmlObjectFragment_objectContentTextView"
+		android:labelFor="@string/xmlObjectFragment_objectContentTextView"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
@@ -89,7 +95,6 @@
 			/>
 
 		<RadioButton
-			android:id="@+id/isFemale"
 			android:text="@string/xmlObjectFragment_isFemaleRadioButton"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -104,6 +109,8 @@
 		android:ems="10"
 		android:inputType="phone"
 		android:text="@string/xmlObjectFragment_phoneEditText"
+		android:hint="@string/xmlObjectFragment_objectContentTextView"
+		android:labelFor="@string/xmlObjectFragment_objectContentTextView"
 		android:layout_marginStart="8dp"
 		android:layout_marginEnd="8dp"
 		android:layout_marginTop="8dp"

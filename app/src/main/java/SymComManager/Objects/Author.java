@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
  * Classe définissant un auteur, utilisée dans la partie GraphQL.
  */
 public class Author {
-	private int id;
-	private String firstname;
-	private String lastname;
+	private final int id;
+	private final String firstname;
+	private final String lastname;
 	
 	/**
 	 * Constructeur.

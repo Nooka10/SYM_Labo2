@@ -4,7 +4,6 @@ import SymComManager.CommunicationEventListener;
 import SymComManager.JsonObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ public class JsonObjectSendFragment extends MainFragment {
 	private EditText computerManufacturerEditText = null;
 	private Button jsonSendButton = null;
 	private TextView responseTextView = null;
+	private final JsonObjectSymComManager scm = new JsonObjectSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public JsonObjectSendFragment() {
@@ -34,44 +34,42 @@ public class JsonObjectSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_json_object_send, container, false);
 		
 		// on récupère les éléments du fragment
-		computerNameEditText = (EditText) view.findViewById(R.id.jsonObjectFragmentComputerNameEditText);
-		computerManufacturerEditText = (EditText) view.findViewById(R.id.jsonObjectFragmentComputerManufacturerEditText);
-		jsonSendButton = (Button) view.findViewById(R.id.jsonObjectFragmentSendJsonObjectButton);
-		responseTextView = (TextView) view.findViewById(R.id.jsonObjectFragmentResponseFromServerTextView);
+		computerNameEditText = view.findViewById(R.id.jsonObjectFragmentComputerNameEditText);
+		computerManufacturerEditText = view.findViewById(R.id.jsonObjectFragmentComputerManufacturerEditText);
+		jsonSendButton = view.findViewById(R.id.jsonObjectFragmentSendJsonObjectButton);
+		responseTextView = view.findViewById(R.id.jsonObjectFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
+		
+		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
+		scm.setCommunicationEventListener(new CommunicationEventListener() {
+			@Override
+			public boolean handleServerResponse(final String response) {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						responseTextView.setText(response);
+					}
+				});
+				return true;
+			}
+		});
 		
 		// on set l'action à effectuer lorsque le bouton est pressé
 		jsonSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					JsonObjectSymComManager scm = new JsonObjectSymComManager();
+					jsonSendButton.setText(R.string.jsonObjectFragment_ResponseContentTextView);
+					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
-					
-					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
-					scm.setCommunicationEventListener(new CommunicationEventListener() {
-						@Override
-						public boolean handleServerResponse(final String response) {
-							getActivity().runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									responseTextView.setText(response);
-								}
-							});
-							return true;
-						}
-					});
-					
 					// on envoit la requête au serveur
 					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

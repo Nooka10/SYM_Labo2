@@ -41,7 +41,7 @@ public class XmlObjectSymComManager {
 	 * @param url, l'url du serveur auquel envoyer la requête.
 	 * @throws IllegalStateException, lève une exception si le communicationEventListener n'a pas été défini avant l'appel à sendRequest().
 	 */
-	public void sendRequest(Person personObjectToSend, String url) throws Exception {
+	public void sendRequest(Person personObjectToSend, String url) {
 		if (communicationEventListener == null) {
 			throw new IllegalStateException("You have to call setCommunicationEventListener(CommunicationEventListener l) first to be allowed to send a request.");
 		}

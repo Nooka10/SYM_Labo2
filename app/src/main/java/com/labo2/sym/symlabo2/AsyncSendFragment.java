@@ -20,6 +20,7 @@ public class AsyncSendFragment extends MainFragment {
 	private Button asyncSendButton = null;
 	private EditText editTextToSend = null;
 	private TextView responseTextView = null;
+	private final AsyncSymComManager scm = new AsyncSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public AsyncSendFragment() {
@@ -37,32 +38,31 @@ public class AsyncSendFragment extends MainFragment {
 		View view = inflater.inflate(R.layout.fragment_async_send, container, false);
 		
 		// on récupère les éléments du fragment
-		asyncSendButton = (Button) view.findViewById(R.id.asyncFragmentSendButton);
-		editTextToSend = (EditText) view.findViewById(R.id.asyncFragmentInputEditText);
-		responseTextView = (TextView) view.findViewById(R.id.asyncFragmentResponseFromServerTextView);
+		asyncSendButton = view.findViewById(R.id.asyncFragmentSendButton);
+		editTextToSend = view.findViewById(R.id.asyncFragmentInputEditText);
+		responseTextView = view.findViewById(R.id.asyncFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
+		
+		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
+		scm.setCommunicationEventListener(new CommunicationEventListener() {
+			@Override
+			public boolean handleServerResponse(final String response) {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						responseTextView.setText(response);
+					}
+				});
+				return true;
+			}
+		});
 		
 		// on set l'action à effectuer lorsque le bouton est pressé.
 		asyncSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					AsyncSymComManager scm = new AsyncSymComManager();
-					
-					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
-					scm.setCommunicationEventListener(new CommunicationEventListener() {
-						@Override
-						public boolean handleServerResponse(final String response) {
-							getActivity().runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									responseTextView.setText(response);
-								}
-							});
-							return true;
-						}
-					});
-					
+					asyncSendButton.setText(R.string.asyncFragment_ResponseContentTextView);
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");
 				} catch (Exception e) {

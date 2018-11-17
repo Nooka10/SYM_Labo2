@@ -15,10 +15,10 @@ import static java.lang.Thread.sleep;
  * Hérite de la classe AsyncSymComManager.
  */
 public class DelayedSymComManager extends AsyncSymComManager {
-	private ArrayList<Pair<String, String>> waitingRequests = new ArrayList<>();
+	private final ArrayList<Pair<String, String>> waitingRequests = new ArrayList<>();
 	private boolean isInWaitingQueue = false;
 	
-	private Activity activity;
+	private final Activity activity;
 	
 	/**
 	 * Constructeur.

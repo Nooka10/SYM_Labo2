@@ -5,7 +5,6 @@ import SymComManager.Objects.Person;
 import SymComManager.XmlObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,7 @@ public class XmlObjectSendFragment extends MainFragment {
 	private Spinner phoneType = null;
 	private Button xmlSendButton = null;
 	private TextView responseTextView = null;
-	
+	private final XmlObjectSymComManager scm = new XmlObjectSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public XmlObjectSendFragment() {
@@ -44,14 +43,14 @@ public class XmlObjectSendFragment extends MainFragment {
 		View view = inflater.inflate(R.layout.fragment_xml_object_send, container, false);
 		
 		// on récupère les éléments du fragment
-		firstname = (EditText) view.findViewById(R.id.xmlObjectFragmentFirstnameEditText);
-		lastname = (EditText) view.findViewById(R.id.xmlObjectFragmentLastnameEditText);
-		middlename = (EditText) view.findViewById(R.id.xmlObjectFragmentMiddlenameEditText);
-		isMale = (RadioButton) view.findViewById(R.id.isMale);
-		phonenumber = (EditText) view.findViewById(R.id.xmlObjectFragmentPhoneEditText);
-		phoneType = (Spinner) view.findViewById(R.id.xmlObjectFragmentPhoneTypeSpinner);
-		xmlSendButton = (Button) view.findViewById(R.id.xmlObjectFragmentSendJsonObjectButton);
-		responseTextView = (TextView) view.findViewById(R.id.xmlObjectFragmentResponseFromServerTextView);
+		firstname = view.findViewById(R.id.xmlObjectFragmentFirstnameEditText);
+		lastname = view.findViewById(R.id.xmlObjectFragmentLastnameEditText);
+		middlename = view.findViewById(R.id.xmlObjectFragmentMiddlenameEditText);
+		isMale = view.findViewById(R.id.isMale);
+		phonenumber = view.findViewById(R.id.xmlObjectFragmentPhoneEditText);
+		phoneType = view.findViewById(R.id.xmlObjectFragmentPhoneTypeSpinner);
+		xmlSendButton = view.findViewById(R.id.xmlObjectFragmentSendJsonObjectButton);
+		responseTextView = view.findViewById(R.id.xmlObjectFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// Create an ArrayAdapter using the string array and a default spinner layout
@@ -61,34 +60,32 @@ public class XmlObjectSendFragment extends MainFragment {
 		// Apply the adapter to the spinner
 		phoneType.setAdapter(adapter);
 		
+		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
+		scm.setCommunicationEventListener(new CommunicationEventListener() {
+			@Override
+			public boolean handleServerResponse(final String response) {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						responseTextView.setText(response);
+					}
+				});
+				return true;
+			}
+		});
 		
-		// On set l'action à effectuer lorsque le bouton est pressé.
+		// on set l'action à effectuer lorsque le bouton est pressé
 		xmlSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					XmlObjectSymComManager scm = new XmlObjectSymComManager();
+					xmlSendButton.setText(R.string.xmlObjectFragment_ResponseContentTextView);
+					
 					Person person = new Person(firstname.getText().toString(), lastname.getText().toString(),
 							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),
 							phoneType.getSelectedItem().toString());
-					
-					// On set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur.
-					scm.setCommunicationEventListener(new CommunicationEventListener() {
-						@Override
-						public boolean handleServerResponse(final String response) {
-							getActivity().runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									responseTextView.setText(response);
-								}
-							});
-							return true;
-						}
-					});
-					
-					// On envoit la requête au serveur
+					// on envoit la requête au serveur
  					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

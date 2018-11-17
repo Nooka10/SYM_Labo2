@@ -12,14 +12,15 @@ import java.util.zip.Inflater;
 /**
  * Tâche asynchrone gérant l'envoit d'une requête, l'attente de la réponse et son traitement sur un thread à part.
  */
-public class MyAsyncTask extends AsyncTask<Void, String, String> {
-	private String content;
-	private String url;
-	private String mediaType;
-	private Headers headers;
-	private boolean enableCompression;
-	private SymComManager scm = SymComManager.getInstance();
-	private CommunicationEventListener communicationEventListener;
+class MyAsyncTask extends AsyncTask<Void, String, String> {
+	private final String content;
+	private final String url;
+	private final String mediaType;
+	private final Headers headers;
+	private final boolean enableCompression;
+	private final SymComManager scm = SymComManager.getInstance();
+	private final CommunicationEventListener communicationEventListener;
+	private Exception error;
 	
 	/**
 	 * Constructeur.
@@ -68,9 +69,20 @@ public class MyAsyncTask extends AsyncTask<Void, String, String> {
 			}
 		} catch (IOException | DataFormatException e) {
 			e.printStackTrace();
+			// on enregistre l'erreur survenue
+			error = e;
+			// Une erreur s'est produite, on annule la tâche asynchrone.
+			this.cancel(false);
 		}
 		// FIXME: Que faut-il retourner en cas d'erreur?
 		return null; // une erreur s'est produite
+	}
+	
+	@Override
+	protected void onCancelled() {
+		super.onCancelled();
+		// on affiche l'erreur survenue durant le traitement de la tâche asynchrone
+		communicationEventListener.handleServerResponse(error.getMessage());
 	}
 	
 	@Override

@@ -6,7 +6,6 @@ import okhttp3.Headers;
  * Classe gérant la communication avec le serveur pour le fragment AsyncSendFragment.
  */
 public class AsyncSymComManager {
-	
 	private CommunicationEventListener communicationEventListener = null;
 	
 	/**

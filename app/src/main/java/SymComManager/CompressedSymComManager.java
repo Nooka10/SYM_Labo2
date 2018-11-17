@@ -12,8 +12,7 @@ public class CompressedSymComManager extends JsonObjectSymComManager{
 	 * @param url, l'url du serveur auquel envoyer la requête.
 	 * @throws IllegalStateException, lève une exception si le communicationEventListener n'a pas été défini avant l'appel à sendRequest().
 	 */
-	public void sendRequest(String jsonObject, String url) throws Exception {
-		//Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
+	public void sendRequest(String jsonObject, String url) {
 		if (communicationEventListener == null) {
 			throw new IllegalStateException("You have to call setCommunicationEventListener(CommunicationEventListener l) first to be allowed to send a request.");
 		}
@@ -24,7 +23,7 @@ public class CompressedSymComManager extends JsonObjectSymComManager{
 				.add("accept", "application/json")
 				.add("X-Network", "CSD");
 		
-		// on crée l'Asynktask qui enverra la requête et attendra la réponse sur un thread parallèle.
+		// On crée l'Asynktask qui enverra la requête et attendra la réponse sur un thread parallèle.
 		// La réponse sera traitée à l'aide du communicationEventListener passé en paramètre.
 		new MyAsyncTask(jsonObject, url, "application/json; charset=utf-8", headersBuilder.build(), true, communicationEventListener).execute();
 	}

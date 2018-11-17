@@ -2,10 +2,8 @@ package com.labo2.sym.symlabo2;
 
 import SymComManager.CommunicationEventListener;
 import SymComManager.CompressedSymComManager;
-import SymComManager.JsonObjectSymComManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +21,7 @@ public class CompressedSendFragment extends MainFragment {
 	private EditText computerManufacturerEditText = null;
 	private Button compressedSendButton = null;
 	private TextView responseTextView = null;
+	private final CompressedSymComManager scm = new CompressedSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public CompressedSendFragment() {
@@ -41,38 +40,38 @@ public class CompressedSendFragment extends MainFragment {
 		View view = inflater.inflate(R.layout.fragment_compressed_send, container, false);
 		
 		// on récupère les éléments du fragment
-		computerNameEditText = (EditText) view.findViewById(R.id.compressedFragmentComputerNameEditText);
-		computerManufacturerEditText = (EditText) view.findViewById(R.id.compressedFragmentComputerManufacturerEditText);
-		compressedSendButton = (Button) view.findViewById(R.id.compressedFragmentSendJsonObjectButton);
-		responseTextView = (TextView) view.findViewById(R.id.compressedFragmentResponseFromServerTextView);
+		computerNameEditText = view.findViewById(R.id.compressedFragmentComputerNameEditText);
+		computerManufacturerEditText = view.findViewById(R.id.compressedFragmentComputerManufacturerEditText);
+		compressedSendButton = view.findViewById(R.id.compressedFragmentSendJsonObjectButton);
+		responseTextView = view.findViewById(R.id.compressedFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
+		
+		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
+		scm.setCommunicationEventListener(new CommunicationEventListener() {
+			@Override
+			public boolean handleServerResponse(final String response) {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						responseTextView.setText(response);
+					}
+				});
+				return true;
+			}
+		});
 		
 		// on set l'action à effectuer lorsque le bouton est pressé.
 		compressedSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					CompressedSymComManager scm = new CompressedSymComManager();
+					compressedSendButton.setText(R.string.compressedFragment_ResponseContentTextView);
+					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
 					
-					// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
-					scm.setCommunicationEventListener(new CommunicationEventListener() {
-						@Override
-						public boolean handleServerResponse(final String response) {
-							getActivity().runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									responseTextView.setText(response);
-								}
-							});
-							return true;
-						}
-					});
-					
 					// on envoit la requête au serveur
 					scm.sendRequest(computerObject, "http://sym.iict.ch/rest/json");
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

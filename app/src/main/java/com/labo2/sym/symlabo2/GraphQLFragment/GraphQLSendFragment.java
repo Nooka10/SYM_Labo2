@@ -29,7 +29,7 @@ public class GraphQLSendFragment extends MainFragment {
 	
 	private Spinner listAuthors;
 	private RecyclerView allPostByAuthor;
-	private GraphQLObjectSymComManager scm = new GraphQLObjectSymComManager();
+	private final GraphQLObjectSymComManager scm = new GraphQLObjectSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public GraphQLSendFragment() {
@@ -47,8 +47,8 @@ public class GraphQLSendFragment extends MainFragment {
 		View view = inflater.inflate(R.layout.fragment_graph_ql, container, false);
 		
 		// on récupère les éléments du fragment
-		listAuthors = (Spinner) view.findViewById(R.id.graphqlFragment_authorsSpinner);
-		allPostByAuthor = (RecyclerView) view.findViewById(R.id.graphqlFragment_authorPostsRecyclerView);
+		listAuthors = view.findViewById(R.id.graphqlFragment_authorsSpinner);
+		allPostByAuthor = view.findViewById(R.id.graphqlFragment_authorPostsRecyclerView);
 		allPostByAuthor.setLayoutManager(new LinearLayoutManager(getContext()));
 		allPostByAuthor.setAdapter(new RecyclerViewAdapter());
 		

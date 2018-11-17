@@ -8,7 +8,7 @@ import okhttp3.Headers;
  * Classe gérant la communication avec le serveur pour le fragment JsonObjectSendFragment.
  */
 public class JsonObjectSymComManager {
-	private Gson gson = new Gson();
+	private final Gson gson = new Gson();
 	protected CommunicationEventListener communicationEventListener = null;
 	
 	/**
@@ -28,7 +28,7 @@ public class JsonObjectSymComManager {
 	 * @param url, l'url du serveur auquel envoyer la requête.
 	 * @throws IllegalStateException, lève une exception si le communicationEventListener n'a pas été défini avant l'appel à sendRequest().
 	 */
-	public void sendRequest(String jsonObject, String url) throws Exception {
+	public void sendRequest(String jsonObject, String url) {
 		if (communicationEventListener == null) {
 			throw new IllegalStateException("You have to call setCommunicationEventListener(CommunicationEventListener l) first to be allowed to send a request.");
 		}
