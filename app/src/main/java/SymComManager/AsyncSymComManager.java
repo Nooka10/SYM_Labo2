@@ -15,7 +15,7 @@ public class AsyncSymComManager {
 		Headers.Builder headersBuilder = new Headers.Builder();
 		headersBuilder.add("content-type", "plain/text");
 		
-		new MyAsyncTask(content, url, "text/plain; charset=utf-8", headersBuilder.build(), communicationEventListener).execute();
+		new MyAsyncTask(content, url, "text/plain; charset=utf-8", headersBuilder.build(), false,  communicationEventListener).execute();
 	}
 	
 	public void setCommunicationEventListener(CommunicationEventListener l) {

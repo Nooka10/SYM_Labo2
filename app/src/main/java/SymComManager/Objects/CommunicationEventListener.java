@@ -1,7 +1,3 @@
-package SymComManager;
-
-import java.util.EventListener;
-
 /**
  * This interface is given as an example; when building up an asynchronous
  * interface using event listeners, one has to define a specific event listener deriving
@@ -33,6 +29,10 @@ import java.util.EventListener;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+package SymComManager.Objects;
+
+import java.util.EventListener;
+
 public interface CommunicationEventListener extends EventListener {
-	boolean handleServerResponse(String response);
+	public boolean handleServerResponse(String response);
 }

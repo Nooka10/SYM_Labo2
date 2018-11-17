@@ -21,7 +21,7 @@ public class DelayedSymComManager extends AsyncSymComManager {
 	}
 	
 	@Override
-	public void sendRequest(String content, String url) throws Exception {
+	public synchronized void sendRequest(String content, String url) throws Exception {
 		if (isNetworkAvailable()) {
 			// La connection à internet est disponible -> on envoit la requête
 			super.sendRequest(content, url);

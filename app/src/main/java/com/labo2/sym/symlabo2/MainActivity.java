@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
 		} else if (id == R.id.graphqlObjectSend) {
 			fragmentClass = GraphQLFragment.class;
 		} else if (id == R.id.compressedSend) {
-			//fragmentClass = FragmentOne.class;
+			fragmentClass = CompressedSendFragment.class;
 		}
 		
 		try {

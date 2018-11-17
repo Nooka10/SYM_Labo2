@@ -27,7 +27,6 @@ public class JsonObjectSendFragment extends MainFragment {
 	private EditText computerNameEditText = null;
 	private EditText computerManufacturerEditText = null;
 	private Button jsonSendButton = null;
-	private Button bigJsonSendButton = null;
 	private TextView responseTextView = null;
 	
 	private OnFragmentInteractionListener mListener;
@@ -51,7 +50,6 @@ public class JsonObjectSendFragment extends MainFragment {
 		computerNameEditText = (EditText) view.findViewById(R.id.jsonObjectFragmentComputerNameEditText);
 		computerManufacturerEditText = (EditText) view.findViewById(R.id.jsonObjectFragmentComputerManufacturerEditText);
 		jsonSendButton = (Button) view.findViewById(R.id.jsonObjectFragmentSendJsonObjectButton);
-		bigJsonSendButton = (Button) view.findViewById(R.id.jsonObjectFragmentBigJsonSendButton);
 		responseTextView = (TextView) view.findViewById(R.id.jsonObjectFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		

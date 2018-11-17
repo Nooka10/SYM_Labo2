@@ -1,10 +1,11 @@
 package SymComManager;
 
+
 import SymComManager.Objects.Computer;
 import com.google.gson.Gson;
 import okhttp3.Headers;
 
-public class JsonObjectSymComManager {
+public class CompressedSymComManager {
 	private Gson gson = new Gson();
 	private CommunicationEventListener communicationEventListener = null;
 	
@@ -21,9 +22,10 @@ public class JsonObjectSymComManager {
 		
 		Headers.Builder headersBuilder = new Headers.Builder();
 		headersBuilder.add("content-type", "application/json")
-				.add("accept", "application/json");
+				.add("accept", "application/json")
+				.add("X-Network", "CSD");
 		
-		new MyAsyncTask(jsonObject, url, "application/json; charset=utf-8", headersBuilder.build(), false, communicationEventListener).execute();
+		new MyAsyncTask(jsonObject, url, "application/json; charset=utf-8", headersBuilder.build(), true, communicationEventListener).execute();
 	}
 	
 	public void setCommunicationEventListener(CommunicationEventListener l) {

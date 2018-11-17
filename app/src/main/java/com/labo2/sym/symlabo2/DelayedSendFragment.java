@@ -14,12 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DelayedSendFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DelayedSendFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Asynchronous Transmission" dans le menu ou sur le fragment "Home".
  */
 public class DelayedSendFragment extends MainFragment {
 	

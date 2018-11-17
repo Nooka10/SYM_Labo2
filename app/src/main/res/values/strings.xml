@@ -14,6 +14,7 @@
 	<string name="main">Home</string>
 
 	<string name="mainFragmentText">Sélectionnez un nouvel onglet</string>
+
 	<string name="asyncSendFragment">asyncSendFragment</string>
 	<string name="asyncFragment_InputTextView">Input to server</string>
 	<string name="asyncFragment_editText">Hello World !</string>
@@ -32,7 +33,6 @@
 	<string name="jsonObjectFragment_computerNameEditText">Computer name</string>
 	<string name="jsonObjectFragment_computerManufacturerEditText">Computer manufacturer</string>
 	<string name="jsonObjectFragment_sendJsonObjectButton">Send Computer as JSON object</string>
-	<string name="jsonObjectFragment_sendBigJsonObjectButton">Send big JSON object</string>
 	<string name="jsonObjectFragment_responseTitleTextView">Response from server</string>
 	<string name="jsonObjectFragment_ResponseContentTextView">No response yet.</string>
 
@@ -60,6 +60,10 @@
 	<string name="CardTitle">Title</string>
 	<string name="cardContent">Content</string>
 
-	<!-- TODO: Remove or change this placeholder text -->
-	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="compressedFragment_objectContentTextView">Object Content</string>
+	<string name="compressedFragment_computerNameEditText">Computer name</string>
+	<string name="compressedFragment_computerManufacturerEditText">Computer manufacturer</string>
+	<string name="compressedFragment_sendJsonObjectButton">Send Computer as compressed object</string>
+	<string name="compressedFragment_responseTitleTextView">Response from server</string>
+	<string name="compressedFragment_ResponseContentTextView">No response yet.</string>
 </resources>

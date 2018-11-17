@@ -37,7 +37,7 @@ public class XmlObjectSymComManager {
 		headersBuilder.add("content-type", "application/xml");
 		
 		String xml = createXML(personObjectToSend);
-		new MyAsyncTask(xml, url, "application/xml; charset=utf-8", headersBuilder.build(), communicationEventListener).execute();
+		new MyAsyncTask(xml, url, "application/xml; charset=utf-8", headersBuilder.build(), false, communicationEventListener).execute();
 	}
 	
 	public void setCommunicationEventListener(CommunicationEventListener l) {

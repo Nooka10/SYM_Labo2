@@ -4,7 +4,6 @@ import SymComManager.AsyncSymComManager;
 import SymComManager.CommunicationEventListener;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AsyncSendFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AsyncSendFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Asynchronous Transmission" dans le menu ou sur le fragment "Home".
  */
 public class AsyncSendFragment extends MainFragment {
 	
