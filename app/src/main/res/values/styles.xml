@@ -9,8 +9,8 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
-	    false
-	    true
+	    <item name="windowActionBar">false</item>
+	    <item name="windowNoTitle">true</item>
 	    @android:color/transparent
     </style>
 
