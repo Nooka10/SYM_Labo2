@@ -62,5 +62,5 @@
 	<string name="compressedFragment_sendJsonObjectButton">Send Computer as compressed object</string>
 	<string name="compressedFragment_responseTitleTextView">Response from server</string>
 	<string name="compressedFragment_ResponseContentTextView">No response yet.</string>
-	<string name="ViewHolderDateText">Published the</string>
+	<string name="ViewHolderDateText">Published the %1$s</string>
 </resources>

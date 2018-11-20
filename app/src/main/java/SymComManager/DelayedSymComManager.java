@@ -70,7 +70,6 @@ public class DelayedSymComManager extends AsyncSymComManager {
 			// la connection internet n'est pas disponible -> on ajoute la requête dans la file d'attente si elle ne s'y trouve pas déjà
 			// la requête sera traitée par le thread qui tourne en boucle lorsque la connexion internet sera rétablie
 			if (!isInWaitingQueue) {
-				waitingRequests.add(new Pair<>(content, url));
 				isInWaitingQueue = true;
 			}
 		}

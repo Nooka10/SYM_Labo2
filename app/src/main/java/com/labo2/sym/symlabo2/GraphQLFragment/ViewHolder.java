@@ -37,8 +37,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
 	 */
 	void bind(Post post) {
 		titleTextView.setText(post.getTitle());
-		// FIXME: Je comprend pas ce qu'il me dit de faire... ^^
-		dateTextView.setText(R.string.ViewHolderDateText + post.getDateString());
+		dateTextView.setText(dateTextView.getContext().getString(R.string.ViewHolderDateText, post.getDateString()));
 		descriptionTextView.setText(post.getDescription());
 		contentTextView.setText(post.getContent());
 	}

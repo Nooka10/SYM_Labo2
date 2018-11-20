@@ -1,7 +1,12 @@
 package SymComManager;
 
 import SymComManager.Objects.Person;
+import android.util.Xml;
 import okhttp3.Headers;
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.StringWriter;
+
 
 /**
  * Classe gérant la communication avec le serveur pour le fragment XMLObjectSendFragment.
@@ -15,24 +20,48 @@ public class XmlObjectSymComManager {
 	 * @return un String contenant les données de la personne au format XML.
 	 */
 	private String createXML(Person person) {
-		StringBuilder xml = new StringBuilder();
-		xml.append("<?xml version='1.0' encoding='UTF-8'?>\n")
-				.append("<!DOCTYPE directory SYSTEM \"http://sym.iict.ch/directory.dtd\">")
-				.append("<directory>")
-				.append("   <person>")
-				.append("       <name>").append(person.getLastname()).append("</name>")
-				.append("       <firstname>").append(person.getFirstname()).append("</firstname>");
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
 		
-		if (person.getMiddlename() != null && !person.getMiddlename().isEmpty()) {
-			// la personne possède un middlename -> on ajoute la balise et les données
-			xml.append("       <middlename>").append(person.getMiddlename()).append("</middlename>");
+		try {
+			serializer.processingInstruction("xml version='1.0' encoding='UTF-8'");
+			serializer.docdecl("directory SYSTEM \"http://sym.iict.ch/directory.dtd\"");
+			serializer.setOutput(writer);
+			serializer.startTag("", "directory");
+			serializer.startTag("", "person");
+			serializer.startTag("", "name");
+			serializer.text(person.getLastname());
+			serializer.endTag("", "name");
+			
+			serializer.startTag("", "firstname");
+			serializer.text(person.getFirstname());
+			serializer.endTag("", "firstname");
+			
+			if (person.getMiddlename() != null && !person.getMiddlename().isEmpty()) {
+				// la personne possède un middlename -> on ajoute la balise et les données
+				serializer.startTag("", "middlename");
+				serializer.text(person.getMiddlename());
+				serializer.endTag("", "middlename");
+			}
+			
+			serializer.startTag("", "gender");
+			serializer.text(String.valueOf(person.getSex()));
+			serializer.endTag("", "gender");
+			
+			serializer.startTag("", "phone");
+			serializer.attribute("", "type", String.valueOf(person.getPhoneType()));
+			serializer.text(person.getPhone());
+			serializer.endTag("", "phone");
+			
+			serializer.endTag("", "person");
+			serializer.endTag("", "directory");
+			serializer.endDocument();
+			System.out.println(writer.toString());
+			return writer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		xml.append("       <gender>").append(person.getSex()).append("</gender>")
-				.append("       <phone type='").append(person.getPhoneType()).append("'>").append(person.getPhone()).append("</phone>")
-				.append("   </person>")
-				.append("</directory>");
 		
-		return xml.toString();
 	}
 	
 	/**

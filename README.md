@@ -100,9 +100,10 @@ On peut également utiliser une transmission différée mais on se heurte aux m�
 Lors de l'utilisation de protocoles asynchrones, c'est généralement deux threads différents qui se préoccupent de la préparation, de l'envoi, de la réception et du traitement des données. Quels problèmes cela peut-il poser ?
 ```
 
-Le problème est que seul le thread UI peut modifier la vue. Si d'autres threads pouvaient le faire, on pourrait avoir des problèmes de concurrence.
-
-PAS BIEN COMPRIS LA QUESTION....
+- Un des problèmes qui peut survenir est que seul le thread UI peut modifier la vue. Si d'autres threads pouvaient le faire, on pourrait avoir des problèmes de concurrence. Résultat, si on a beaucoup de threads annexes qui sont lancés, il peut y avoir des problèmes de performances lorsqu'ils tenteront tous de mettre la vue à jour en même temps...
+- On peut aussi avoir des problèmes d'affichage incorrect par rapport aux résultats de la requête...
+  Imaginons par exemple une interface avec un bouton incrémentant un compteur situé sur un serveur, ainsi qu'un textView affichant la valeur du compteur retournée par le serveur. Cliquer sur le bouton lance un nouveau thread qui effectue la requête et attend le résultat. Lorsqu'il reçoit le résultat, il me le texteView à jour.
+  Imaginons maintenant que l'utilisateur spam le bouton. De nombreux threads sont créés et de nombreuses requêtes sont envoyées au serveur. Le problème est alors qu'on a aucun moyen de savoir quelle réponse correspond à quelle requête... Autrement dit, on peut parfaitement imaginer que le thread de la requête 1 se fasse préempter juste avant d'afficher le résultat et que tous les autres threads lui passent devant... Puis que finalement, il affiche le résultat 1, malgré qu'il y a eu bien plus de requêtes et que le compteur du serveur ne vale pas du tout 1... 
 
 
 
@@ -116,13 +117,25 @@ Lorsque l'on implémente l'écriture différée, il arrive que l'on ait soudaine
 Comparer les deux techniques (et éventuellement d'autres que vous pourriez imaginer) et discuter des avantages et inconvénients respectifs.
 ```
 
+Imaginons une situation qui se produit fréquemment dans le cadre d'une application. Disons qu'un utilisateur effectue les 3 actions suivantes dans l'ordre donné:
+
+1. L'utilisateur se crée un compte.
+2. L'utilisateur modifie ses informations.
+3. L'utilisateur supprime son compte.
+
+Dans le cas d'une écriture différée, cela veut dire que chacune de ces 3 requêtes est enregistrée dans une base de données locale. Lorsqu'une connexion avec le serveur est disponible, un thread à part s'occupe alors de les envoyer. À ce moment, on a les 2 possibilités ci-dessous :
+
 #### Effectuer une connexion par transmission différée :
 
-
+Effectuer une nouvelle connexion pour chaque requête permet d'alléger le poids des requêtes. Ainsi, si l'une d'elle échoue, seule celle-ci sera renvoyée...
+En revanche, dans notre cas d'utilisation, cela pose un problème majeur. Comment définir l'ordre des requêtes et comment s'assurer que la requête de création arrive avant celle de modification et que la requête de suppression arrive bien en dernier? Un autre ordre poserait immédiatiement problème...
 
 #### Multiplexer toutes les connexions vers un même serveur en une seule connexion de transport :
 
+Effectuer une seule connexion et envoyer toutes les requêtes d'un coup permet de régler le problème d'ordre des requêtes. On peut alors spécifier l'ordre dans lequel le serveur doit traiter les requêtes et donc s'assurer que tout se déroule dans le bon sens.
 
+En revanche, mettre plusieurs requêtes en une seule peut alourdir considérablement la requête finale... Si un problème de transmission arrive, il faut alors retransmettre l'ensemble des requêtes...
+Cette taille plus importante peut également poser des problèmes évident de performances dans le cas d'une mauvaise connexion (faible débit)... Si le payload fait plusieurs Mo mais que la connexion est lente, l'envoi risque de durer longtemps voir de ne jamais aboutir... Dans ce cas, le nombre de requêtes en attente n'aura de cesse d'augmenter, alourdissant le payload à envoyer au serveur et accentuant encore le problème... On entre alors dans un cercle vicieux sans fin.
 
 ### 4.5) Transmission d'objets :
 
