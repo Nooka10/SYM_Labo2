@@ -20,15 +20,15 @@ import java.util.Objects;
  */
 public class XmlObjectSendFragment extends MainFragment {
 	
+	private final XmlObjectSymComManager scm = new XmlObjectSymComManager();
 	private EditText firstname = null;
 	private EditText lastname = null;
-	private RadioButton isMale= null;
+	private RadioButton isMale = null;
 	private EditText middlename = null;
 	private EditText phonenumber = null;
 	private Spinner phoneType = null;
 	private Button xmlSendButton = null;
 	private TextView responseTextView = null;
-	private final XmlObjectSymComManager scm = new XmlObjectSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public XmlObjectSendFragment() {
@@ -58,8 +58,7 @@ public class XmlObjectSendFragment extends MainFragment {
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()), R.array.phoneTypeArray,
-				android.R.layout.simple_spinner_item);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()), R.array.phoneTypeArray, android.R.layout.simple_spinner_item);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
@@ -91,12 +90,13 @@ public class XmlObjectSendFragment extends MainFragment {
 			public void onClick(View v) {
 				try {
 					xmlSendButton.setText(R.string.waitingForResponse);
+					responseTextView.setText(R.string.waitingForResponse);
 					
 					Person person = new Person(firstname.getText().toString(), lastname.getText().toString(),
 							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),
 							phoneType.getSelectedItem().toString());
 					// on envoit la requête au serveur
- 					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
+					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

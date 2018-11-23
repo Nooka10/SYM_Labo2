@@ -16,7 +16,6 @@ import static java.lang.Thread.sleep;
  */
 public class DelayedSymComManager extends AsyncSymComManager {
 	private final ArrayList<Pair<String, String>> waitingRequests = new ArrayList<>();
-	private boolean isInWaitingQueue = false;
 	
 	private final Activity activity;
 	
@@ -39,7 +38,6 @@ public class DelayedSymComManager extends AsyncSymComManager {
 					while (isNetworkAvailable() && !waitingRequests.isEmpty()) {
 						// on récupère la 1ère requête de la liste d'attente et on l'enlève de la liste d'attente
 						Pair<String, String> request = waitingRequests.remove(0);
-						isInWaitingQueue = false;
 						try {
 							// on envoit la requête
 							sendRequest(request.first, request.second);
@@ -67,11 +65,9 @@ public class DelayedSymComManager extends AsyncSymComManager {
 			// La connection à internet est disponible -> on envoit la requête
 			super.sendRequest(content, url);
 		} else {
-			// la connection internet n'est pas disponible -> on ajoute la requête dans la file d'attente si elle ne s'y trouve pas déjà
+			// la connection internet n'est pas disponible -> on ajoute la requête dans la file d'attente
 			// la requête sera traitée par le thread qui tourne en boucle lorsque la connexion internet sera rétablie
-			if (!isInWaitingQueue) {
-				isInWaitingQueue = true;
-			}
+			waitingRequests.add(new Pair<>(content, url));
 		}
 	}
 	

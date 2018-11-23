@@ -79,6 +79,7 @@ public class CompressedSendFragment extends MainFragment {
 			public void onClick(View v) {
 				try {
 					compressedSendButton.setText(R.string.waitingForResponse);
+					responseTextView.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());

@@ -116,7 +116,7 @@ Lors de l'utilisation de protocoles asynchrones, c'est généralement deux threa
 ```
 Lorsque l'on implémente l'écriture différée, il arrive que l'on ait soudainement plusieurs transmissions en attente qui deviennent possibles simultanément. Comment implémenter proprement cette situation (sans réalisation pratique) ? Voici deux possibilités :
 	- Effectuer une connexion par transmission différée
-	- Multiplexer toutes les connexions vers un même serveur en une seule connexion de 		  transport. Dans ce dernier cas, comment implémenter le protocole applicatif, quels 	   avantages peut-on espérer de ce multiplexage, et surtout, comment doit-on 			  planifier les réponses du serveur lorsque ces dernières s'avèrent nécessaires ?
+	- Multiplexer toutes les connexions vers un même serveur en une seule connexion de transport. Dans ce dernier cas, comment implémenter le protocole applicatif, quels avantages peut-on espérer de ce multiplexage, et surtout, comment doit-on planifier les réponses du serveur lorsque ces dernières s'avèrent nécessaires ?
 	
 Comparer les deux techniques (et éventuellement d'autres que vous pourriez imaginer) et discuter des avantages et inconvénients respectifs.
 ```

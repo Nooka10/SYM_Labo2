@@ -74,6 +74,7 @@ public class DelayedSendFragment extends MainFragment {
 			public void onClick(View v) {
 				try {
 					delayedSendButton.setText(R.string.waitingForResponse);
+					responseTextView.setText(R.string.waitingForResponse);
 					
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");
