@@ -4,6 +4,7 @@ import SymComManager.CommunicationEventListener;
 import SymComManager.GraphQLObjectSymComManager;
 import SymComManager.Objects.Author;
 import SymComManager.Objects.Post;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -130,40 +131,45 @@ public class GraphQLSendFragment extends MainFragment {
 			scm.setCommunicationEventListener(new CommunicationEventListener() {
 				@Override
 				public boolean handleServerResponse(final String response) {
-					getActivity().runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								// on transforme la réponse en JSON  et on récupère le tableau contenant tous les posts de l'auteur
-								JSONArray allPosts = new JSONObject(response).getJSONObject("data").getJSONArray("allPostByAuthor");
-								ArrayList<Post> authorPostsList = new ArrayList<>();
-								
-								// on transforme chaque objet JSON en un Post qu'on ajoute à notre liste de posts
-								for (int i = 0; i < allPosts.length(); i++) {
-									JSONObject o = allPosts.getJSONObject(i);
-									authorPostsList.add(new Post(o.getString("title"), o.getString("description"),
-											o.getString("content"), o.getString("date")));
+					Activity activity = getActivity();
+					if (activity != null) {
+						activity.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									// on transforme la réponse en JSON  et on récupère le tableau contenant tous les posts de l'auteur
+									JSONArray allPosts = new JSONObject(response).getJSONObject("data").getJSONArray("allPostByAuthor");
+									ArrayList<Post> authorPostsList = new ArrayList<>();
+									
+									// on transforme chaque objet JSON en un Post qu'on ajoute à notre liste de posts
+									for (int i = 0; i < allPosts.length(); i++) {
+										JSONObject o = allPosts.getJSONObject(i);
+										authorPostsList.add(new Post(o.getString("title"), o.getString("description"),
+												o.getString("content"), o.getString("date")));
+									}
+									
+									// FIXME: si on incline le natel, la vue est reconstruite et donc les appels à l'API refait...! Ya-t-il moyen de faire autrement?
+									// --> il faudrait mettre une base de donnée temporaire (cache) pour stoquer les résultats et ne pas refaire la requête
+									// -> à mettre dans le rapport
+									
+									
+									// on crée un RecyclerViewAdapter à partir de l'adapter du RecyclerView 'allPostByAuthor'
+									RecyclerViewAdapter r = (RecyclerViewAdapter) allPostByAuthor.getAdapter();
+									// on ajoute le tableau des posts de l'auteur sélectionné au RecyclerView
+									if (r != null) {
+										r.setListPosts(authorPostsList);
+									} else {
+										throw new RuntimeException("A problem occurs with the RecyclerView.");
+									}
+								} catch (JSONException e) {
+									e.printStackTrace();
 								}
-								
-								// FIXME: si on incline le natel, la vue est reconstruite et donc les appels à l'API refait...! Ya-t-il moyen de faire autrement?
-								// --> il faudrait mettre une base de donnée temporaire (cache) pour stoquer les résultats et ne pas refaire la requête
-								// -> à mettre dans le rapport
-							
-								
-								// on crée un RecyclerViewAdapter à partir de l'adapter du RecyclerView 'allPostByAuthor'
-								RecyclerViewAdapter r = (RecyclerViewAdapter) allPostByAuthor.getAdapter();
-								// on ajoute le tableau des posts de l'auteur sélectionné au RecyclerView
-								if (r != null) {
-									r.setListPosts(authorPostsList);
-								} else{
-									throw new RuntimeException("A problem occurs with the RecyclerView.");
-								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
-					});
-					return true;
+						});
+						return true;
+					} else {
+						return false;
+					}
 				}
 			});
 			

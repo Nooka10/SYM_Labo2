@@ -23,7 +23,7 @@ public class AsyncSymComManager {
 		Headers.Builder headersBuilder = new Headers.Builder();
 		headersBuilder.add("content-type", "plain/text");
 		
-		// on crée l'Asynktask qui enverra la requête et attendra la réponse sur un thread parallèle.
+		// on crée l'Asynctask qui enverra la requête et attendra la réponse sur un thread parallèle.
 		// La réponse sera traitée à l'aide du communicationEventListener passé en paramètre.
 		new MyAsyncTask(content, url, "text/plain; charset=utf-8", headersBuilder.build(), false,  communicationEventListener).execute();
 	}

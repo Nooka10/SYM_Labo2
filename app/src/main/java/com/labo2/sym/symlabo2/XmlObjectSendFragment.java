@@ -3,6 +3,7 @@ package com.labo2.sym.symlabo2;
 import SymComManager.CommunicationEventListener;
 import SymComManager.Objects.Person;
 import SymComManager.XmlObjectSymComManager;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -16,15 +17,15 @@ import android.widget.*;
  */
 public class XmlObjectSendFragment extends MainFragment {
 	
+	private final XmlObjectSymComManager scm = new XmlObjectSymComManager();
 	private EditText firstname = null;
 	private EditText lastname = null;
-	private RadioButton isMale= null;
+	private RadioButton isMale = null;
 	private EditText middlename = null;
 	private EditText phonenumber = null;
 	private Spinner phoneType = null;
 	private Button xmlSendButton = null;
 	private TextView responseTextView = null;
-	private final XmlObjectSymComManager scm = new XmlObjectSymComManager();
 	private OnFragmentInteractionListener mListener;
 	
 	public XmlObjectSendFragment() {
@@ -91,7 +92,7 @@ public class XmlObjectSendFragment extends MainFragment {
 							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),
 							phoneType.getSelectedItem().toString());
 					// on envoit la requête au serveur
- 					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
+					scm.sendRequest(person, "http://sym.iict.ch/rest/xml");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -81,7 +81,11 @@ public class DelayedSymComManager extends AsyncSymComManager {
 	 */
 	private boolean isNetworkAvailable() {
 		ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		if (connectivityManager != null) {
+			NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+			return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		} else {
+			return false;
+		}
 	}
 }

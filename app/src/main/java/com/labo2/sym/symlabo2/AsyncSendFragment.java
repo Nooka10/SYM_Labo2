@@ -2,6 +2,7 @@ package com.labo2.sym.symlabo2;
 
 import SymComManager.AsyncSymComManager;
 import SymComManager.CommunicationEventListener;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
