@@ -49,8 +49,6 @@ public class DelayedSendFragment extends MainFragment {
 		
 		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 		scm.setCommunicationEventListener(new CommunicationEventListener() {
-			// FIXME: plante si des requêtes sont en attente mais qu'on a changé de fragment lorsqu'on rétablit la connexion internet...!
-			@Override
 			public boolean handleServerResponse(final String response) {
 				Activity activity = getActivity();
 				if (activity != null) {
