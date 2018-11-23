@@ -45,7 +45,7 @@ class MyAsyncTask extends AsyncTask<Void, String, String> {
 		try {
 			// on envoit la requête
 			Response res = scm.sendRequest(content, url, mediaType, headers, enableCompression);
-			if (res.isSuccessful()) { // la réponse a bien été reçue
+			if (res.isSuccessful() && res.body() != null) { // la réponse a bien été reçue
 				// FIXME: demander comment utiliser le InflaterInputStream
 				if (enableCompression) { // la compression est activée -> La réponse est compressée -> il faut donc décompresser la réponse (son body)
 					byte[] body = res.body().bytes();

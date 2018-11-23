@@ -5,6 +5,7 @@ import SymComManager.DelayedSymComManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ public class DelayedSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_delayed_send, container, false);
 		
@@ -73,6 +74,7 @@ public class DelayedSendFragment extends MainFragment {
 			public void onClick(View v) {
 				try {
 					delayedSendButton.setText(R.string.waitingForResponse);
+					responseTextView.setText(R.string.waitingForResponse);
 					
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");

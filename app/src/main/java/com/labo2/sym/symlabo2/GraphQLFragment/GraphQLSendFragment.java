@@ -7,6 +7,7 @@ import SymComManager.Objects.Post;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "GraphQL Object Transmission" dans le menu ou sur le fragment "Home".
@@ -43,7 +45,7 @@ public class GraphQLSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_graph_ql, container, false);
 		
@@ -84,32 +86,37 @@ public class GraphQLSendFragment extends MainFragment {
 			scm.setCommunicationEventListener(new CommunicationEventListener() {
 				@Override
 				public boolean handleServerResponse(final String response) {
-					getActivity().runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								// on transforme la réponse en JSON et on récupère le tableau d'auteurs
-								JSONArray allAuthors = new JSONObject(response).getJSONObject("data").getJSONArray("allAuthors");
-								ArrayList<Author> authorsList = new ArrayList<>();
-								
-								// on transforme chaque objet JSON en un Author qu'on ajoute à notre liste d'auteurs.
-								for (int i = 0; i < allAuthors.length(); i++) {
-									JSONObject o = allAuthors.getJSONObject(i);
-									authorsList.add(new Author(o.getInt("id"), o.getString("first_name"), o.getString("last_name")));
+					Activity activity = getActivity();
+					if (activity != null) {
+						activity.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									// on transforme la réponse en JSON et on récupère le tableau d'auteurs
+									JSONArray allAuthors = new JSONObject(response).getJSONObject("data").getJSONArray("allAuthors");
+									ArrayList<Author> authorsList = new ArrayList<>();
+									
+									// on transforme chaque objet JSON en un Author qu'on ajoute à notre liste d'auteurs.
+									for (int i = 0; i < allAuthors.length(); i++) {
+										JSONObject o = allAuthors.getJSONObject(i);
+										authorsList.add(new Author(o.getInt("id"), o.getString("first_name"), o.getString("last_name")));
+									}
+									
+									// on crée un ArrayAdapter en utilisant le layout par défaut et en le populant avec le contenu de 'authorsList'
+									ArrayAdapter<Author> adapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, authorsList);
+									// on spécifie le layout à utiliser pour afficher les choix des éléments du spinner
+									adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+									// on applique l'ArrayAdapter au spinner
+									listAuthors.setAdapter(adapter);
+								} catch (JSONException e) {
+									e.printStackTrace();
 								}
-								
-								// on crée un ArrayAdapter en utilisant le layout par défaut et en le populant avec le contenu de 'authorsList'
-								ArrayAdapter<Author> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, authorsList);
-								// on spécifie le layout à utiliser pour afficher les choix des éléments du spinner
-								adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-								// on applique l'ArrayAdapter au spinner
-								listAuthors.setAdapter(adapter);
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
-					});
-					return true;
+						});
+						return true;
+					} else {
+						return false;
+					}
 				}
 			});
 			

@@ -5,6 +5,7 @@ import SymComManager.CompressedSymComManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class CompressedSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_compressed_send, container, false);
@@ -73,6 +74,7 @@ public class CompressedSendFragment extends MainFragment {
 			public void onClick(View v) {
 				try {
 					compressedSendButton.setText(R.string.waitingForResponse);
+					responseTextView.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());

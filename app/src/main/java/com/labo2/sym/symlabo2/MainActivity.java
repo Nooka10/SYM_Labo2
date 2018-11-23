@@ -2,6 +2,7 @@ package com.labo2.sym.symlabo2;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 	
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
-	public boolean onNavigationItemSelected(MenuItem item) {
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 		Fragment fragment = null;
@@ -116,12 +117,16 @@ public class MainActivity extends AppCompatActivity
 		
 		try {
 			// FIXME: faut-il faire quelque chose pour tout ces risque de nullpointer?
-			fragment = (Fragment) fragmentClass.newInstance();
+			if (fragmentClass != null) {
+				fragment = (Fragment) fragmentClass.newInstance();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+		if (fragment != null) {
+			fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+		}
 		
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
