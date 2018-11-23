@@ -2,6 +2,7 @@ package com.labo2.sym.symlabo2;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -63,23 +64,8 @@ public class MainActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		
-		return super.onOptionsItemSelected(item);
 	}
 	
 	/**
@@ -91,9 +77,8 @@ public class MainActivity extends AppCompatActivity
 		onNavigationItemSelected(navigationView.getMenu().getItem(idItemToSelect).setChecked(true));
 	}
 	
-	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
-	public boolean onNavigationItemSelected(MenuItem item) {
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 		Fragment fragment = null;
@@ -115,13 +100,16 @@ public class MainActivity extends AppCompatActivity
 		}
 		
 		try {
-			// FIXME: faut-il faire quelque chose pour tout ces risque de nullpointer?
-			fragment = (Fragment) fragmentClass.newInstance();
+			if (fragmentClass != null) {
+				fragment = (Fragment) fragmentClass.newInstance();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+		if (fragment != null) {
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+		}
 		
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);

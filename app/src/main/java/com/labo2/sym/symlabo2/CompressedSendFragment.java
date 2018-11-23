@@ -2,8 +2,10 @@ package com.labo2.sym.symlabo2;
 
 import SymComManager.CommunicationEventListener;
 import SymComManager.CompressedSymComManager;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Random;
 
 /**
  * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Compressed Transmission" dans le menu ou sur le fragment "Home".
@@ -34,7 +38,7 @@ public class CompressedSendFragment extends MainFragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_compressed_send, container, false);
@@ -46,17 +50,28 @@ public class CompressedSendFragment extends MainFragment {
 		responseTextView = view.findViewById(R.id.compressedFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
+		
+		// Code utilisé pour étudier le gain obtenu par la compression
+		RandomString stringGenerator = new RandomString();
+		computerManufacturerEditText.setText(stringGenerator.nextString());
+		computerNameEditText.setText(stringGenerator.nextString());
+		
 		// on set l'action qui sera effectuée lorsqu'on recevra la réponse à la requête au serveur
 		scm.setCommunicationEventListener(new CommunicationEventListener() {
 			@Override
 			public boolean handleServerResponse(final String response) {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						responseTextView.setText(response);
-					}
-				});
-				return true;
+				Activity activity = getActivity();
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							responseTextView.setText(response);
+						}
+					});
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 		

@@ -3,6 +3,7 @@ package com.labo2.sym.symlabo2;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,6 @@ import android.widget.Button;
  * "Home" dans le menu.
  */
 public class MainFragment extends Fragment {
-	
-	private Button asyncSendButton = null;
-	private Button delayedButton = null;
-	private Button jsonObjectButton = null;
-	private Button xmlObjectButton = null;
-	private Button graphQlObjectButton = null;
-	private Button compressedButton = null;
 	
 	private OnFragmentInteractionListener mListener;
 	
@@ -34,17 +28,17 @@ public class MainFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		
 		// on récupère les éléments du fragment
-		asyncSendButton = view.findViewById(R.id.mainFragment_AsyncButton);
-		delayedButton = view.findViewById(R.id.mainFragment_DelayedButton);
-		jsonObjectButton = view.findViewById(R.id.mainFragment_JsonObjectButton);
-		xmlObjectButton = view.findViewById(R.id.mainFragment_XmlObjectButton);
-		graphQlObjectButton = view.findViewById(R.id.mainFragment_GraphQLObjectButton);
-		compressedButton = view.findViewById(R.id.mainFragment_CompressedButton);
+		Button asyncSendButton = view.findViewById(R.id.mainFragment_AsyncButton);
+		Button delayedButton = view.findViewById(R.id.mainFragment_DelayedButton);
+		Button jsonObjectButton = view.findViewById(R.id.mainFragment_JsonObjectButton);
+		Button xmlObjectButton = view.findViewById(R.id.mainFragment_XmlObjectButton);
+		Button graphQlObjectButton = view.findViewById(R.id.mainFragment_GraphQLObjectButton);
+		Button compressedButton = view.findViewById(R.id.mainFragment_CompressedButton);
 		
 		// on lie les boutons avec les boutons du drawer associés afin d'ouvrir le fragment correspondant au bouton cliqué
 		setButtonOnClickListener(asyncSendButton, 1);
@@ -61,7 +55,10 @@ public class MainFragment extends Fragment {
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				((MainActivity)getActivity()).setSelectedNavigationItem(idButton);
+				MainActivity mainActivity = (MainActivity) getActivity();
+				if (mainActivity != null) {
+					mainActivity.setSelectedNavigationItem(idButton);
+				}
 			}
 		});
 	}

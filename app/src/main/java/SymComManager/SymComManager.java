@@ -26,7 +26,7 @@ class SymComManager {
 	
 	private SymComManager() { }
 	
-	private Request createRequest(String content, String url, String applicationType, Headers headers, boolean enableCompression) throws IOException {
+	private Request createRequest(String content, String url, String mediaType, Headers headers, boolean enableCompression) throws IOException {
 		if (url.isEmpty()) {
 			throw new IllegalArgumentException("URL cannot be empty");
 		}
@@ -34,7 +34,7 @@ class SymComManager {
 		if (enableCompression) {
 			try {
 				RequestBody requestBody = RequestBody.create(
-						MediaType.parse(applicationType),
+						MediaType.parse(mediaType),
 						compressData(content)
 				);
 				
@@ -51,7 +51,7 @@ class SymComManager {
 			
 		} else {
 			RequestBody requestBody = RequestBody.create(
-					MediaType.parse(applicationType),
+					MediaType.parse(mediaType),
 					content
 			);
 			
@@ -64,6 +64,7 @@ class SymComManager {
 	}
 	
 	private byte[] compressData(String content) throws IOException {
+		System.out.println("---------------------------- taille avant compression : " + content.length());
 		Deflater deflater = new Deflater(Deflater.BEST_COMPRESSION, true);
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream(byteArrayOutputStream, deflater);
@@ -71,7 +72,10 @@ class SymComManager {
 		deflaterOutputStream.finish();
 		deflaterOutputStream.close();
 		
-		return byteArrayOutputStream.toByteArray();
+		byte [] compressed = byteArrayOutputStream.toByteArray();
+		System.out.println("---------------------------- taille après compression : " + compressed.length);
+		
+		return compressed;
 	}
 	
 	Response sendRequest(String content, String url, String mediaType, Headers headers, boolean enableCompression) throws IOException {

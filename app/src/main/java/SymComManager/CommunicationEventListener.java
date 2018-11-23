@@ -34,6 +34,5 @@ import java.util.EventListener;
  *
  */
 public interface CommunicationEventListener extends EventListener {
-	// FIXME: pourquoi retourne un booléen ?
 	boolean handleServerResponse(String response);
 }
