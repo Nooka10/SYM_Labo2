@@ -12,25 +12,24 @@
 	<string name="delayedSend">Delayed transmission</string>
 	<string name="asynchronousSend">Asynchronous transmission</string>
 	<string name="main">Home</string>
+	<string name="waitingForResponse">No response yet.</string>
+	<string name="receivedAnswer">Response received.</string>
 
 	<string name="asyncFragment_InputTextView">Enter the text to send to the server</string>
 	<string name="asyncFragment_editText">Hello World !</string>
 	<string name="asyncFragment_textButton">Send async request</string>
 	<string name="asyncFragment_ResponseTitleTextView">Response from server</string>
-	<string name="asyncFragment_ResponseContentTextView">No response yet.</string>
 
 	<string name="delayedFragment_InputTextView">Enter the text to send to the server</string>
 	<string name="delayedFragment_editText">Hello World !</string>
 	<string name="delayedFragment_textButton">Send delayed request</string>
 	<string name="delayedFragment_ResponseTitleTextView">Response from server</string>
-	<string name="delayedFragment_ResponseContentTextView">No response yet.</string>
 
 	<string name="jsonObjectFragment_objectContentTextView">Enter the content of the object to send to the server</string>
 	<string name="jsonObjectFragment_computerNameEditText">Computer name</string>
 	<string name="jsonObjectFragment_computerManufacturerEditText">Computer manufacturer</string>
 	<string name="jsonObjectFragment_sendJsonObjectButton">Send Computer as JSON object</string>
 	<string name="jsonObjectFragment_responseTitleTextView">Response from server</string>
-	<string name="jsonObjectFragment_ResponseContentTextView">No response yet.</string>
 
 	<string name="xmlObjectFragment_objectContentTextView">Enter the content of the object to send to the server</string>
 	<string name="xmlObjectFragment_firstnameEditText">Firstname</string>
@@ -41,7 +40,6 @@
 	<string name="xmlObjectFragment_isFemaleRadioButton">Female</string>
 	<string name="xmlObjectFragment_sendXmlObjectButton">Send computer as XML object</string>
 	<string name="xmlObjectFragment_responseTitleTextView">Response from server</string>
-	<string name="xmlObjectFragment_ResponseContentTextView">No response yet.</string>
 	<string-array name="phoneTypeArray">
 		<item id="0">home</item>
 		<item id="1">work</item>
@@ -61,6 +59,5 @@
 	<string name="compressedFragment_computerManufacturerEditText">Computer manufacturer</string>
 	<string name="compressedFragment_sendJsonObjectButton">Send Computer as compressed object</string>
 	<string name="compressedFragment_responseTitleTextView">Response from server</string>
-	<string name="compressedFragment_ResponseContentTextView">No response yet.</string>
 	<string name="ViewHolderDateText">Published the %1$s</string>
 </resources>

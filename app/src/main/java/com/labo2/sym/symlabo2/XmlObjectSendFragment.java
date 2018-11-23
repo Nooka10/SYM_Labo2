@@ -64,13 +64,19 @@ public class XmlObjectSendFragment extends MainFragment {
 		scm.setCommunicationEventListener(new CommunicationEventListener() {
 			@Override
 			public boolean handleServerResponse(final String response) {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						responseTextView.setText(response);
-					}
-				});
-				return true;
+				Activity activity = getActivity();
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							xmlSendButton.setText(R.string.receivedAnswer);
+							responseTextView.setText(response);
+						}
+					});
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 		
@@ -79,7 +85,7 @@ public class XmlObjectSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					xmlSendButton.setText(R.string.xmlObjectFragment_ResponseContentTextView);
+					xmlSendButton.setText(R.string.waitingForResponse);
 					
 					Person person = new Person(firstname.getText().toString(), lastname.getText().toString(),
 							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),

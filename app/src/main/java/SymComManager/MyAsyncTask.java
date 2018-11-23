@@ -59,7 +59,6 @@ class MyAsyncTask extends AsyncTask<Void, String, String> {
 						stream.write(buffer, 0, count);
 					}
 					stream.close();
-					
 					return stream.toString(); // on retourne le body de la requête décompressé
 				} else { // la compression n'est pas activée -> la réponse n'est pas compressée
 				return res.body().string();

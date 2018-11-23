@@ -50,13 +50,19 @@ public class DelayedSendFragment extends MainFragment {
 			// FIXME: plante si des requêtes sont en attente mais qu'on a changé de fragment lorsqu'on rétablit la connexion internet...!
 			@Override
 			public boolean handleServerResponse(final String response) {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						responseTextView.setText(response);
-					}
-				});
-				return true;
+				Activity activity = getActivity();
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							delayedSendButton.setText(R.string.receivedAnswer);
+							responseTextView.setText(response);
+						}
+					});
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 		
@@ -65,7 +71,7 @@ public class DelayedSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					delayedSendButton.setText(R.string.delayedFragment_ResponseContentTextView);
+					delayedSendButton.setText(R.string.waitingForResponse);
 					
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");

@@ -50,13 +50,19 @@ public class CompressedSendFragment extends MainFragment {
 		scm.setCommunicationEventListener(new CommunicationEventListener() {
 			@Override
 			public boolean handleServerResponse(final String response) {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						responseTextView.setText(response);
-					}
-				});
-				return true;
+				Activity activity = getActivity();
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							compressedSendButton.setText(R.string.receivedAnswer);
+							responseTextView.setText(response);
+						}
+					});
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 		
@@ -65,7 +71,7 @@ public class CompressedSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					compressedSendButton.setText(R.string.compressedFragment_ResponseContentTextView);
+					compressedSendButton.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());

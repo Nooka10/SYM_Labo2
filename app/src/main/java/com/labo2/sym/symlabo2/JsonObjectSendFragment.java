@@ -49,13 +49,19 @@ public class JsonObjectSendFragment extends MainFragment {
 		scm.setCommunicationEventListener(new CommunicationEventListener() {
 			@Override
 			public boolean handleServerResponse(final String response) {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						responseTextView.setText(response);
-					}
-				});
-				return true;
+				Activity activity = getActivity();
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							jsonSendButton.setText(R.string.receivedAnswer);
+							responseTextView.setText(response);
+						}
+					});
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 		
@@ -64,7 +70,7 @@ public class JsonObjectSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					jsonSendButton.setText(R.string.jsonObjectFragment_ResponseContentTextView);
+					jsonSendButton.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
