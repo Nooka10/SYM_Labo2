@@ -6,6 +6,10 @@ Auteurs : Benoît Schopfer, Antoine Rochat et Jérémie Châtillon
 
 Nous avons concu notre code de sorte que chaque manipulation soit le plus similaire possible. Chaque manipulation possède un fragment dédié ainsi qu'un *SymComManager* gérant leur communication avec le serveur.
 
+*Remarque globale :*
+
+Modifier l'orientation du téléphone provoque la recréation du layout... Ceci engendre la perte des données entrées dans les champs et, pour le fragment GraphQL, relance la requête pour obtenir l'ensemble des auteurs... Ceci n'est évidemment pas optimal! Il aurait fallu, pour chaque fragment, enregistrer l'état actuel du fragment lorsqu'il est détruit, de sorte à pouvoir le reconstruire à sa prochaine création. Pour le fragment GraphQL, il aurait fallu enregistrer le résultat de la première requête afin de pouvoir le recharger à la recréation du layout. Nous n'avons cependant pas jugé utile de faire tout cela dans le cadre de ce laboratoire...
+
 ### 3.1) Transmission asynchrone : 
 
 La transmission asynchrone est gérée dans la classe *AsyncSymComManager* utilisée par le fragment *AsyncSendFragment*. À la création du fragment, on crée une instance d'*AsyncSymComManager* qui sera chargée de gérer la transmission avec le serveur. On passe à cette instance un *CommunicationEventListener* définissant ce qui devra être fait lorsque l'instance recevra la réponse du serveur, à savoir afficher cette réponse dans le champs prévu à cet effet. Enfin, on définit l'action du bouton qui est d'envoyer une requête au serveur contenant le texte du *EditText* du fragment.
@@ -178,3 +182,40 @@ De manière générale, il faut toujours paginer les données du côté du serve
 Quel gain peut-on constater en moyenne sur des fichiers texte (xml et json sont aussi du texte) en utilisant de la compression du point 3.4 ? Vous comparerez vos résultats par rapport au gain théorique d’une compression DEFLATE, vous enverrez aussi plusieurs tailles de contenu pour comparer.
 ```
 
+Pour calculer le gain moyen obtenu avec la compression deflate, nous avons rempli les deux textfields de notre fragment *CompressedSendFragment* avec des caractères alphanumériques aléatoires de différentes longueurs.
+
+Lors de l'envoi, nous avons vérifié la longueur du texte avant et après la compression. Nous avons fait cette manipulation 10 fois afin d'avoir un minimum de données pour pouvoir faire une moyenne.
+
+Nous avons obtenu les données suivantes :
+
+| longueur requête avant compression | longueur requête après compression | gain     |
+| ---------------------------------- | ---------------------------------- | -------- |
+| 1665                               | 1279                               | ~23.18 % |
+| 957                                | 752                                | ~21.42 % |
+| 5673                               | 4287                               | ~24.43 % |
+| 2337                               | 1783                               | ~23.71 % |
+| 6553                               | 4945                               | ~24.54 % |
+| 4717                               | 3571                               | ~24.30 % |
+| 6429                               | 4852                               | ~24.53 % |
+| 5345                               | 4041                               | ~24.40 % |
+| 4289                               | 3244                               | ~24.36 % |
+| 377                                | 318                                | ~15.65 % |
+
+Le gain moyen obtenu est donc d'environ 23.05 %, soit presque un quart! On remarque que plus le texte est long, plus le gain est important.
+
+En même temps que cette analyse des données envoyées, nous avons observé les données reçues dans la réponse car la réponse aussi est compresée. Nous avons donc étudié la longueur du body de la réponse reçue avant et après la décompression. Nous avons obtenu les données suivantes:
+
+| longueur réponse avant décompression | longueur réponse après décompression | gain     |
+| ------------------------------------ | ------------------------------------ | -------- |
+| 1754                                 | 2500                                 | ~29.84 % |
+| 1214                                 | 1792                                 | ~32.25 % |
+| 4781                                 | 6508                                 | ~26.54 % |
+| 2265                                 | 3172                                 | ~28.59 % |
+| 4539                                 | 7388                                 | ~38.56 % |
+| 4059                                 | 5552                                 | ~26.89 % |
+| 5352                                 | 7264                                 | ~26.32 % |
+| 4532                                 | 6180                                 | ~26.67 % |
+| 3737                                 | 5124                                 | ~27.07 % |
+| 765                                  | 1212                                 | ~36.88 % |
+
+Pour les réponses, on obtient un gain d'environ 29.96 %, soit encore mieux qu'à l'envoi. L'une des explications les plus probable à cette différence de gain entre la compression de la requête et celle de la réponse est qu'on ne connaît pas l'algorithme de compression utilisé par le serveur. Il est probable que le  serveur utilise un algorithme plus performant que celui que nous utilisons pour compresser la requête...
