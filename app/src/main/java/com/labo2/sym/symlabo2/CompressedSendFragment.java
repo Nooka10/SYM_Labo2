@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Random;
-
 /**
  * Classe gérant le fragment affiché lorsque l'utilisateur sélectionne "Compressed Transmission" dans le menu ou sur le fragment "Home".
  */
@@ -50,7 +48,6 @@ public class CompressedSendFragment extends MainFragment {
 		responseTextView = view.findViewById(R.id.compressedFragmentResponseFromServerTextView);
 		responseTextView.setMovementMethod(new ScrollingMovementMethod());
 		
-		
 		// Code utilisé pour étudier le gain obtenu par la compression
 		RandomString stringGenerator = new RandomString();
 		computerManufacturerEditText.setText(stringGenerator.nextString());
@@ -65,6 +62,7 @@ public class CompressedSendFragment extends MainFragment {
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
+							compressedSendButton.setText(R.string.receivedAnswer);
 							responseTextView.setText(response);
 						}
 					});
@@ -80,7 +78,7 @@ public class CompressedSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					compressedSendButton.setText(R.string.compressedFragment_ResponseContentTextView);
+					compressedSendButton.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());
