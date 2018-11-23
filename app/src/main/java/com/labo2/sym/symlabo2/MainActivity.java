@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity
 		}
 		
 		try {
-			// FIXME: faut-il faire quelque chose pour tout ces risque de nullpointer?
 			if (fragmentClass != null) {
 				fragment = (Fragment) fragmentClass.newInstance();
 			}

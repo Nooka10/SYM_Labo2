@@ -158,8 +158,7 @@ Ces inconvénients peuvent aussi être des avantages :
 - En supposant que le client connaît la structure d'objet que supporte le serveur, cela évite de faire des requêtes de validation au serveur. Comme le client sait ce que le serveur attend, il n'a qu'à créer l'objet correspondant et l'envoyer.
 
 ```
-b. L’utilisation d’un mécanisme comme Protocol Buffers8 est-elle compatible avec une
-architecture basée sur HTTP ? Veuillez discuter des éventuels avantages ou limitations par rapport à un protocole basé sur JSON ou XML ?
+b. L’utilisation d’un mécanisme comme Protocol Buffers8 est-elle compatible avec une architecture basée sur HTTP ? Veuillez discuter des éventuels avantages ou limitations par rapport à un protocole basé sur JSON ou XML ?
 ```
 
 Oui, l'utilisation d'un mécanisme comme Protocol Buffers est compatible avec une architecture basée sur HTTP. Le grand avantage de cette technologie est de permettre de sérialiser des données de façon plus flexible, plus efficace et plus légère que le permet le JSON ou le XML. De plus, Protocol Buffers permet une validation des données comme le permet la DTD en XML.

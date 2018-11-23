@@ -46,7 +46,6 @@ class MyAsyncTask extends AsyncTask<Void, String, String> {
 			// on envoit la requête
 			Response res = scm.sendRequest(content, url, mediaType, headers, enableCompression);
 			if (res.isSuccessful() && res.body() != null) { // la réponse a bien été reçue
-				// FIXME: demander comment utiliser le InflaterInputStream
 				if (enableCompression) { // la compression est activée -> La réponse est compressée -> il faut donc décompresser la réponse (son body)
 					byte[] body = res.body().bytes();
 					Inflater inflater = new Inflater(true);
@@ -59,6 +58,7 @@ class MyAsyncTask extends AsyncTask<Void, String, String> {
 						stream.write(buffer, 0, count);
 					}
 					stream.close();
+					inflater.end();
 					return stream.toString(); // on retourne le body de la requête décompressé
 				} else { // la compression n'est pas activée -> la réponse n'est pas compressée
 				return res.body().string();
@@ -73,7 +73,6 @@ class MyAsyncTask extends AsyncTask<Void, String, String> {
 			// Une erreur s'est produite, on annule la tâche asynchrone.
 			this.cancel(false);
 		}
-		// FIXME: Que faut-il retourner en cas d'erreur?
 		return null; // une erreur s'est produite
 	}
 	

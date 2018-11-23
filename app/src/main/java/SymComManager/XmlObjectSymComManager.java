@@ -56,7 +56,6 @@ public class XmlObjectSymComManager {
 			serializer.endTag("", "person");
 			serializer.endTag("", "directory");
 			serializer.endDocument();
-			System.out.println(writer.toString());
 			return writer.toString();
 		} catch (Exception e) {
 			throw new RuntimeException(e);

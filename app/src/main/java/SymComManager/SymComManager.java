@@ -26,7 +26,7 @@ class SymComManager {
 	
 	private SymComManager() { }
 	
-	private Request createRequest(String content, String url, String applicationType, Headers headers, boolean enableCompression) throws IOException {
+	private Request createRequest(String content, String url, String mediaType, Headers headers, boolean enableCompression) throws IOException {
 		if (url.isEmpty()) {
 			throw new IllegalArgumentException("URL cannot be empty");
 		}
@@ -34,7 +34,7 @@ class SymComManager {
 		if (enableCompression) {
 			try {
 				RequestBody requestBody = RequestBody.create(
-						MediaType.parse(applicationType),
+						MediaType.parse(mediaType),
 						compressData(content)
 				);
 				
@@ -46,12 +46,12 @@ class SymComManager {
 						.build();
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new IOException("An error occuprs durring the compression of the content");
+				throw new IOException("An error occurs durring the compression of the content");
 			}
 			
 		} else {
 			RequestBody requestBody = RequestBody.create(
-					MediaType.parse(applicationType),
+					MediaType.parse(mediaType),
 					content
 			);
 			
@@ -70,6 +70,7 @@ class SymComManager {
 		deflaterOutputStream.write(content.getBytes());
 		deflaterOutputStream.finish();
 		deflaterOutputStream.close();
+		deflater.end();
 		
 		return byteArrayOutputStream.toByteArray();
 	}

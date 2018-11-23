@@ -155,11 +155,6 @@ public class GraphQLSendFragment extends MainFragment {
 												o.getString("content"), o.getString("date")));
 									}
 									
-									// FIXME: si on incline le natel, la vue est reconstruite et donc les appels à l'API refait...! Ya-t-il moyen de faire autrement?
-									// --> il faudrait mettre une base de donnée temporaire (cache) pour stoquer les résultats et ne pas refaire la requête
-									// -> à mettre dans le rapport
-									
-									
 									// on crée un RecyclerViewAdapter à partir de l'adapter du RecyclerView 'allPostByAuthor'
 									RecyclerViewAdapter r = (RecyclerViewAdapter) allPostByAuthor.getAdapter();
 									// on ajoute le tableau des posts de l'auteur sélectionné au RecyclerView
