@@ -56,6 +56,7 @@ public class JsonObjectSendFragment extends MainFragment {
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
+							jsonSendButton.setText(R.string.receivedAnswer);
 							responseTextView.setText(response);
 						}
 					});
@@ -71,7 +72,7 @@ public class JsonObjectSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					jsonSendButton.setText(R.string.jsonObjectFragment_ResponseContentTextView);
+					jsonSendButton.setText(R.string.waitingForResponse);
 					
 					String computerObject = scm.createComputerObject(computerNameEditText.getText().toString(),
 							computerManufacturerEditText.getText().toString());

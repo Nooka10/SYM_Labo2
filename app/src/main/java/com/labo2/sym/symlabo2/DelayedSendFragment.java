@@ -57,6 +57,7 @@ public class DelayedSendFragment extends MainFragment {
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
+							delayedSendButton.setText(R.string.receivedAnswer);
 							responseTextView.setText(response);
 						}
 					});
@@ -72,7 +73,7 @@ public class DelayedSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					delayedSendButton.setText(R.string.delayedFragment_ResponseContentTextView);
+					delayedSendButton.setText(R.string.waitingForResponse);
 					
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");

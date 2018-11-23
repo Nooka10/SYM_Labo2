@@ -84,7 +84,7 @@
 		android:layout_width="0dp"
 		android:layout_height="0dp"
 		android:layout_marginTop="8dp"
-		android:text="@string/compressedFragment_ResponseContentTextView"
+		android:text="@string/waitingForResponse"
 		app:layout_constraintTop_toBottomOf="@+id/compressedFragmentTextView2"
 		android:layout_marginLeft="8dp"
 		app:layout_constraintLeft_toLeftOf="parent"

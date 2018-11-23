@@ -54,6 +54,7 @@ public class AsyncSendFragment extends MainFragment {
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
+							asyncSendButton.setText(R.string.receivedAnswer);
 							responseTextView.setText(response);
 						}
 					});
@@ -69,7 +70,7 @@ public class AsyncSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					asyncSendButton.setText(R.string.asyncFragment_ResponseContentTextView);
+					asyncSendButton.setText(R.string.waitingForResponse);
 					// on envoit la requête au serveur
 					scm.sendRequest(editTextToSend.getText().toString(), "http://sym.iict.ch/rest/txt");
 				} catch (Exception e) {

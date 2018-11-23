@@ -74,6 +74,7 @@ public class XmlObjectSendFragment extends MainFragment {
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
+							xmlSendButton.setText(R.string.receivedAnswer);
 							responseTextView.setText(response);
 						}
 					});
@@ -89,7 +90,7 @@ public class XmlObjectSendFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				try {
-					xmlSendButton.setText(R.string.xmlObjectFragment_ResponseContentTextView);
+					xmlSendButton.setText(R.string.waitingForResponse);
 					
 					Person person = new Person(firstname.getText().toString(), lastname.getText().toString(),
 							isMale.isSelected(), middlename.getText().toString(), phonenumber.getText().toString(),
